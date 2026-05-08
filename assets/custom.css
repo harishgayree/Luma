@@ -20,6 +20,7 @@
 
 .header__menu-item {
   font-family: sans-serif;
+  padding: 6px 16px;
 }
 
 .header:not(.header--middle-left,.header--middle-center) .header__inline-menu {
@@ -30,9 +31,21 @@
 .header--top-center {
   grid-template-areas:"heading left-icons icons" "navigation navigation navigation";
   grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 30px;
 }
 
 .header--top-center .header__heading {
   justify-self: flex-start;
   text-align: left;
+}
+
+.header:before {
+  content: '';
+  position: absolute;
+  top: 57%;
+  transform: translateY(-57%);
+  height: 0.1px;
+  background: #000;
+  width: 100%;
+  left: 0;
 }
