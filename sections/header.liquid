@@ -147,24 +147,6 @@
       endif
     -%}
 
-      {%- if section.settings.logo_position == 'top-left' -%}
-        <div class="custom-header__search">
-          <form action="{{ routes.search_url }}" method="get" role="search" class="custom-search-form">
-            <button type="submit" class="custom-search-btn" aria-label="Search">
-              {{ 'icon-search.svg' | inline_asset_content }}
-            </button>
-
-            <input
-              type="search"
-              name="q"
-              class="custom-search-input"
-              placeholder="{{ section.settings.search_placeholder_text }}"
-              autocomplete="off"
-            >
-          </form>
-        </div>
-      {%- endif -%}
-
     {%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
         <h1 class="header__heading">
