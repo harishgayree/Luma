@@ -21,3 +21,8 @@
 .header__menu-item {
   font-family: sans-serif;
 }
+
+.header:not(.header--middle-left,.header--middle-center) .header__inline-menu {
+  text-align: center;
+  margin: 0;
+}
