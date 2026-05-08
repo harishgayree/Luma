@@ -66,12 +66,12 @@
         "search_radius": 6,
         "search_bg": "#ffffff",
         "search_border": "#dddddd",
-        "search_button_bg": "#111111",
+        "search_button_bg": "#ffffff",
         "search_button_icon": "#ffffff",
         "offer_bg": "#f3f3f3",
         "offer_color": "#111111",
         "menu_font_size": 16,
-        "icon_size": 22
+        "icon_size": 23
       }
     }
   },
