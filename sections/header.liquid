@@ -142,10 +142,28 @@
         render 'header-drawer'
       endif
 
-      if section.settings.logo_position != 'top-center' or section.settings.menu == blank
+      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
         render 'header-search', input_id: 'Search-In-Modal-1'
       endif
     -%}
+
+      {%- if section.settings.logo_position == 'top-left' -%}
+        <div class="custom-header__search">
+          <form action="{{ routes.search_url }}" method="get" role="search" class="custom-search-form">
+            <button type="submit" class="custom-search-btn" aria-label="Search">
+              {{ 'icon-search.svg' | inline_asset_content }}
+            </button>
+
+            <input
+              type="search"
+              name="q"
+              class="custom-search-input"
+              placeholder="{{ section.settings.search_placeholder_text }}"
+              autocomplete="off"
+            >
+          </form>
+        </div>
+      {%- endif -%}
 
     {%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
