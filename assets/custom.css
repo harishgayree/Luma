@@ -5,3 +5,15 @@
 .announcement-bar__message {
   font-family: sans-serif;
 }
+
+.announcement-bar__contact-link {
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+}
+
+.announcement-bar__contact {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: sans-serif;
+}
