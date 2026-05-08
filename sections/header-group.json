@@ -28,6 +28,7 @@
       "settings": {
         "auto_rotate": false,
         "change_slides_speed": 5,
+        "font-size": 16,
         "color_scheme": "scheme-4",
         "show_contact_info": true,
         "contact_phone": "(555) 888 8888",
@@ -49,29 +50,12 @@
         "show_line_separator": true,
         "color_scheme": "scheme-1",
         "menu_color_scheme": "scheme-1",
-        "show_inline_search": true,
-        "search_placeholder_text": "i am looking for...",
-        "show_header_action": true,
-        "header_action_text": "TOP OFFERS!",
-        "header_action_link": "",
         "enable_country_selector": true,
         "enable_language_selector": true,
         "enable_customer_avatar": true,
         "margin_bottom": 0,
         "padding_top": 20,
-        "padding_bottom": 20,
-        "show_wishlist": true,
-        "wishlist_link": "",
-        "search_height": 54,
-        "search_radius": 6,
-        "search_bg": "#ffffff",
-        "search_border": "#dddddd",
-        "search_button_bg": "#ffffff",
-        "search_button_icon": "#ffffff",
-        "offer_bg": "#f3f3f3",
-        "offer_color": "#111111",
-        "menu_font_size": 16,
-        "icon_size": 23
+        "padding_bottom": 20
       }
     }
   },
