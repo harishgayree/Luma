@@ -62,7 +62,6 @@
         "padding_bottom": 20,
         "show_wishlist": true,
         "wishlist_link": "",
-        "custom_logo_width": 180,
         "search_height": 54,
         "search_radius": 6,
         "search_bg": "#ffffff",
@@ -71,7 +70,7 @@
         "search_button_icon": "#ffffff",
         "offer_bg": "#f3f3f3",
         "offer_color": "#111111",
-        "menu_font_size": 20,
+        "menu_font_size": 16,
         "icon_size": 22
       }
     }
