@@ -136,6 +136,23 @@
         </style>
       {%- endif -%}
     {%- endif -%}
+    <div class="announcement-bar__contact">
+      {%- if section.settings.show_contact_info and section.settings.contact_phone != blank -%}
+        <a
+          href="tel:{{ section.settings.contact_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}"
+          class="announcement-bar__contact-link"
+        >
+          <span class="announcement-bar__contact-icon" aria-hidden="true">📞</span>
+          <span>{{ section.settings.contact_phone }}</span>
+        </a>
+      {%- endif -%}
+      {%- if section.settings.show_contact_info and section.settings.contact_email != blank -%}
+        <a href="mailto:{{ section.settings.contact_email }}" class="announcement-bar__contact-link">
+          <span class="announcement-bar__contact-icon" aria-hidden="true">✉️</span>
+          <span>{{ section.settings.contact_email }}</span>
+        </a>
+      {%- endif -%}
+    </div>
     <div class="localization-wrapper">
       {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
         <localization-form class="small-hide medium-hide">
@@ -192,7 +209,25 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-4"
-    },  
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact_info",
+      "default": true,
+      "label": "Show contact information"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Phone number",
+      "default": "(555) 888 8888"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Email address",
+      "default": "demo@lume.com"
+    },
     {
       "type": "checkbox",
       "id": "show_line_separator",
