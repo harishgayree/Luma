@@ -129,11 +129,6 @@
     data-sticky-type="{{ section.settings.sticky_header_type }}"
   {% endif %}
   class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
-  --search-btn-background: {{ section.settings.search_button_bg }};
-  --search-btn-color:{{ section.settings.search_button_icon }};
-  --offer-icon-background:{{ section.settings.offer_bg }};
-  --offer-color:{{ section.settings.offer_color }};
-  --font-size:{{ section.settings.menu_font_size }}px;
 >
   {%- liquid
     assign social_links = false
@@ -147,7 +142,13 @@
       assign localization_forms = true
     endif
   -%}
-  <header class="custom-header color-{{ section.settings.color_scheme }}">
+  <header class="custom-header color-{{ section.settings.color_scheme }}"
+   --search-btn-background: {{ section.settings.search_button_bg }};
+  --search-btn-color:{{ section.settings.search_button_icon }};
+  --offer-icon-background:{{ section.settings.offer_bg }};
+  --offer-color:{{ section.settings.offer_color }};
+  --font-size:{{ section.settings.menu_font_size }}px;
+  >
   <div class="page-width">
 
     <!-- TOP HEADER -->
@@ -674,16 +675,6 @@
       "type": "url",
       "id": "wishlist_link",
       "label": "Wishlist link"
-    },
-    {
-      "type": "range",
-      "id": "custom_logo_width",
-      "min": 80,
-      "max": 300,
-      "step": 10,
-      "unit": "px",
-      "label": "Logo width",
-      "default": 180
     },
     {
       "type": "range",
