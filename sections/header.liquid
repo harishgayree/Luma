@@ -143,11 +143,17 @@
     endif
   -%}
   <header class="custom-header color-{{ section.settings.color_scheme }}"
-   --search-btn-background: {{ section.settings.search_button_bg }};
-  --search-btn-color:{{ section.settings.search_button_icon }};
-  --offer-icon-background:{{ section.settings.offer_bg }};
-  --offer-color:{{ section.settings.offer_color }};
-  --font-size:{{ section.settings.menu_font_size }}px;
+   style="
+    --search-btn-background: {{ section.settings.search_button_bg }};
+    --search-btn-color: {{ section.settings.search_button_icon }};
+    --offer-icon-background: {{ section.settings.offer_bg }};
+    --offer-color: {{ section.settings.offer_color }};
+    --menu-font-size: {{ section.settings.menu_font_size }}px;
+    --search-height: {{ section.settings.search_height }}px;
+    --search-radius: {{ section.settings.search_radius }}px;
+    --search-bg: {{ section.settings.search_bg }};
+    --search-border: {{ section.settings.search_border }};
+  "
   >
   <div class="page-width">
 
