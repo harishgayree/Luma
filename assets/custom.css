@@ -68,7 +68,7 @@
   box-shadow: none;
 }
 
-.header__icon .svg-wrapper {
+.header__icon .svg-wrapper, .offer-box img {
   width: 30px;
   height: 30px;
 }
