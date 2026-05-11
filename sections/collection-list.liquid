@@ -62,23 +62,48 @@
           endif
         -%}
         {%- for block in section.blocks -%}
+          {%- assign collection = block.settings.collection -%}
+
           <li
             id="Slide-{{ section.id }}-{{ forloop.index }}"
-            class="collection-list__item grid__item{% if show_mobile_slider %} slider__slide{% endif %}{% if block.settings.collection.featured_image == nil %} collection-list__item--no-media{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            class="collection-list__item grid__item{% if show_mobile_slider %} slider__slide{% endif %}"
             {{ block.shopify_attributes }}
-            {% if settings.animations_reveal_on_scroll %}
-              data-cascade
-              style="--animation-order: {{ forloop.index }};"
-            {% endif %}
           >
-            {%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
-            {%- assign placeholder_image = 'collection-apparel-' | append: placeholder_image_index -%}
-            {% render 'card-collection',
-              card_collection: block.settings.collection,
-              media_aspect_ratio: section.settings.image_ratio,
-              columns: columns,
-              placeholder_image: placeholder_image
-            %}
+            <a href="{{ collection.url }}" class="custom-collection-card">
+
+              {%- if collection.featured_image != blank -%}
+                <div class="custom-collection-image">
+                  {{
+                    collection.featured_image
+                    | image_url: width: 1000
+                    | image_tag: loading: 'lazy'
+                  }}
+
+                  <!-- item count -->
+                  <div class="custom-item-count">
+                    {{ collection.products_count }} Items
+                  </div>
+
+                  <!-- overlay -->
+                  <div class="custom-overlay">
+                    <div class="custom-overlay-content">
+                      
+                      <!-- title -->
+                      <h3 class="custom-collection-title">
+                        {{ collection.title }}
+                      </h3>
+
+                      <!-- arrow -->
+                      <div class="custom-arrow">
+                        →
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+
+            </a>
           </li>
         {%- endfor -%}
       </ul>
@@ -133,6 +158,104 @@
     {%- endif -%}
   </div>
 </div>
+
+<style>
+.custom-collection-card{
+  display:block;
+  text-decoration:none;
+  position:relative;
+  overflow:hidden;
+  border-radius:{{ section.settings.card_radius }}px;
+}
+
+.custom-collection-image{
+  position:relative;
+  overflow:hidden;
+  height:100%;
+}
+
+.custom-collection-image img{
+  width:100%;
+  display:block;
+  transition:0.5s ease;
+}
+
+.custom-collection-card:hover img{
+  transform:scale(1.05);
+}
+
+.custom-item-count{
+  position:absolute;
+  top:20px;
+  right:20px;
+  z-index:3;
+  color:{{ section.settings.item_color }};
+  font-size:{{ section.settings.item_size }}px;
+  font-weight:500;
+}
+
+.custom-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.6), rgba(0,0,0,0));
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding:30px;
+}
+
+.custom-overlay-content{
+  width:100%;
+  text-align:{{ section.settings.title_alignment }};
+}
+
+.custom-collection-title{
+  margin:0;
+  color:{{ section.settings.title_color }};
+  font-size:{{ section.settings.title_size }}px;
+  text-transform:{{ section.settings.card_text_transform }};
+}
+
+.custom-arrow{
+  width:60px;
+  height:60px;
+  border-radius:100%;
+  background:{{ section.settings.arrow_bg }};
+  color:{{ section.settings.arrow_color }};
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  margin-top:15px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:0.4s ease;
+}
+
+.custom-overlay-content:hover .custom-arrow{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media screen and (max-width:749px){
+
+  .custom-item-count{
+    font-size:14px;
+    top:10px;
+    right:10px;
+  }
+
+  .custom-collection-title{
+    font-size:22px;
+  }
+
+  .custom-arrow{
+    width:45px;
+    height:45px;
+    font-size:22px;
+  }
+}
+</style>
 
 {% schema %}
 {
@@ -268,6 +391,105 @@
       "default": false,
       "label": "t:sections.collection-list.settings.show_view_all.label",
       "info": "t:sections.collection-list.settings.show_view_all.info"   
+    },
+    {
+      "type": "header",
+      "content": "Card Settings"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card Radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title Size",
+      "min": 12,
+      "max": 60,
+      "step": 1,
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title Alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "card_text_transform",
+      "label": "Card Text Transform",
+      "default": "uppercase",
+      "options": [
+        {
+          "value": "none",
+          "label": "Normal"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "item_color",
+      "label": "Item Count Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "item_size",
+      "label": "Item Count Size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "arrow_bg",
+      "label": "Arrow Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow Color",
+      "default": "#000000"
     },
     {
       "type": "header",
