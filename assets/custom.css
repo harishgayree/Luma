@@ -53,3 +53,17 @@
 .search-center-custom {
   padding: 0 3rem 5px;
 }
+
+.search__input.field__input {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.search__input.field__input:focus {
+  box-shadow: none;
+  border-color: #000;
+}
+
+.search-center-custom .field:after {
+  box-shadow: none;
+}
