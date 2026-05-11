@@ -77,3 +77,18 @@
   width: 26px;
   height: 26px;
 }
+
+.offer-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding-right: 16px;
+}
+
+.offer-box span {
+  font-size: 17px;
+  font-weight: bold;
+  color: #000;
+  text-transform: uppercase;
+}
