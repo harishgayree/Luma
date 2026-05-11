@@ -55,6 +55,7 @@
         "enable_language_selector": true,
         "enable_customer_avatar": true,
         "show_wishlist": true,
+        "offer_img": "shopify://shop_images/icon-c0a4feda-1867-45cc-8229-d1e7d77740a8_1.png",
         "offer_txt": "Top Offers!",
         "margin_bottom": 0,
         "padding_top": 12,
