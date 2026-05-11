@@ -343,6 +343,7 @@
         </a>
       {%- endif -%}
 
+      {% if section.settings.show_wishlist %}
         <div class="wishlist_icon header__icon link focus-inset">
           <span class="svg-wrapper">
             <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -350,6 +351,7 @@
             </svg>
           </span>
         </div>
+      {% endif %}
 
       {%- for block in section.blocks -%}
         {%- case block.type -%}
@@ -738,6 +740,15 @@
       "default": true,
       "label": "t:sections.header.settings.enable_customer_avatar.label",
       "info": "t:sections.header.settings.enable_customer_avatar.info"
+    },
+    {
+      "type": "header",
+      "content": "Wish list"
+    },
+    {
+      "type":"checkbox",
+      "id":"show_wishlist",
+      "label": "Show Wishlist"
     },
     {
       "type": "header",
