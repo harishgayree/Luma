@@ -51,9 +51,5 @@
 }
 
 .search-center-custom {
-  padding: 0 6rem 5px;
-}
-
-.search-center-custom .search-modal__form {
-  max-width: 80rem;
+  padding: 0 3rem 5px;
 }
