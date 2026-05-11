@@ -289,6 +289,22 @@
     {%- endif -%}
 
     <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
+      
+      <div class="offer-box">
+        {% if section.settings.offer_img != blank %}
+          <img
+            src="{{ section.settings.offer_img | image_url }}"
+            alt="{{ section.settings.offer_txt }}"
+            width=""
+            height=""
+          >
+        {% endif %}
+
+        {% if section.settings.offer_txt != blank %}
+          <span>{{ section.settings.offer_txt }}</span>
+        {% endif %}
+      </div>
+
       <div class="desktop-localization-wrapper">
         {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
           <localization-form class="small-hide medium-hide" data-prevent-hide>
@@ -743,12 +759,26 @@
     },
     {
       "type": "header",
-      "content": "Wish list"
+      "content": "Wishlist"
     },
     {
       "type":"checkbox",
       "id":"show_wishlist",
       "label": "Show Wishlist"
+    },
+    {
+      "type": "header",
+      "content": "Offer Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "offer_img",
+      "label": "Offer Image"
+    },
+    {
+      "type":"text",
+      "id": "offer_txt",
+      "label": "Offer Text"
     },
     {
       "type": "header",
