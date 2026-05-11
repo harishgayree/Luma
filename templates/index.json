@@ -17,10 +17,10 @@
           "settings": {
             "image": "shopify://shop_images/slider-1-af032f75-be19-40f5-90d9-5e3d7803ec49.png",
             "image_overlay_opacity": 0,
+            "subheading": "Outwere for cooler day",
             "heading": "<strong>Bold looks everyday wear</strong>",
             "heading_size": "hxxl",
             "text_transform": "uppercase",
-            "subheading": "Outwere for cooler day",
             "button_label": "SHOP NOW",
             "link": "shopify://collections/all",
             "button_style_secondary": false,
@@ -36,10 +36,10 @@
           "settings": {
             "image": "shopify://shop_images/slider-2-e6fc5d6a-eaaf-43d8-8ecb-52257201e172.png",
             "image_overlay_opacity": 0,
+            "subheading": "Outwere for cooler day",
             "heading": "Elegance in every stitch",
             "heading_size": "h0",
             "text_transform": "none",
-            "subheading": "Outwere for cooler day",
             "button_label": "SHOP NOW",
             "link": "shopify://collections",
             "button_style_secondary": false,
@@ -55,10 +55,10 @@
           "settings": {
             "image": "shopify://shop_images/slider-3-42edd3b7-5e1a-4a19-9c23-29be8804ecd7.png",
             "image_overlay_opacity": 0,
+            "subheading": "Tell your brand's story through images",
             "heading": "Image slide",
             "heading_size": "h1",
             "text_transform": "none",
-            "subheading": "Tell your brand's story through images",
             "button_label": "Button label",
             "link": "",
             "button_style_secondary": false,
@@ -132,6 +132,7 @@
       "settings": {
         "title": "Shop by categories",
         "heading_size": "h1",
+        "text_alignment": "center",
         "image_ratio": "portrait",
         "columns_desktop": 5,
         "color_scheme": "",
