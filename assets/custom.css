@@ -53,3 +53,7 @@
 .search-center-custom {
   padding: 0 6rem 5px;
 }
+
+.search-center-custom .search-modal__form {
+  max-width: 80rem;
+}
