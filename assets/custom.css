@@ -64,6 +64,6 @@
   border-color: #000;
 }
 
-.search-center-custom .field:after {
+.search-center-custom .field:after, .search-center-custom .field:hover:after {
   box-shadow: none;
 }
