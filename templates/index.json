@@ -226,6 +226,51 @@
         "show_text_below": true
       }
     },
+    "custom_testimonials_6NB3tH": {
+      "type": "custom-testimonials",
+      "blocks": {
+        "review_bG98Jx": {
+          "type": "review",
+          "settings": {
+            "name": "John Doe",
+            "role": "Manager",
+            "review": "Lorem ipsum dolor sit amet.",
+            "rating": 5
+          }
+        },
+        "review_fqccct": {
+          "type": "review",
+          "settings": {
+            "name": "John Doe",
+            "role": "Manager",
+            "review": "Lorem ipsum dolor sit amet.",
+            "rating": 5
+          }
+        },
+        "review_RxBDJq": {
+          "type": "review",
+          "settings": {
+            "name": "John Doe",
+            "role": "Manager",
+            "review": "Lorem ipsum dolor sit amet.",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "review_bG98Jx",
+        "review_fqccct",
+        "review_RxBDJq"
+      ],
+      "name": "Custom Testimonials",
+      "settings": {
+        "heading": "TESTIMONIALS",
+        "bg_color": "#f5f5f5",
+        "heading_color": "#111111",
+        "card_bg": "#ebebeb",
+        "text_color": "#555555"
+      }
+    },
     "fashion_blogs_DjJMYw": {
       "type": "Fashion-Blogs",
       "blocks": {
@@ -283,6 +328,7 @@
     "collection_list_bAAPVR",
     "custom_featured_collection_k9mcft",
     "image_banner_Ajm7nN",
+    "custom_testimonials_6NB3tH",
     "fashion_blogs_DjJMYw"
   ]
 }
