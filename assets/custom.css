@@ -104,3 +104,14 @@
 .featured_collections .card-wrapper {
   border-inline-start: 1px solid;
 }
+
+.featured_collections {
+  border: 1px solid;
+  border-inline-start: 0px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.featured_collections .card__content {
+  text-align: center;
+}
