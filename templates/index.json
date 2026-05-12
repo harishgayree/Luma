@@ -280,6 +280,7 @@
         "blog_6MN3DF": {
           "type": "blog",
           "settings": {
+            "image": "shopify://shop_images/blog-1-e51a0638-cd21-4274-9770-23dc1e8a85fa.png",
             "date": "06 Mar",
             "title": "Why do we use it?",
             "text": "Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt...",
@@ -290,6 +291,7 @@
         "blog_Kan6Ya": {
           "type": "blog",
           "settings": {
+            "image": "shopify://shop_images/blog-2-34e3470f-7ce0-48b4-b973-8ebc946ee208.png",
             "date": "06 Mar",
             "title": "Why do we use it?",
             "text": "Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt...",
@@ -300,6 +302,7 @@
         "blog_L3LM8d": {
           "type": "blog",
           "settings": {
+            "image": "shopify://shop_images/blog-4-a63c4a0e-91b7-4f66-ac17-b74e2fcf74f5.png",
             "date": "06 Mar",
             "title": "Why do we use it?",
             "text": "Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt...",
