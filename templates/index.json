@@ -140,7 +140,7 @@
         "show_view_all": false,
         "card_radius": 10,
         "title_color": "#ffffff",
-        "title_size": 22,
+        "title_size": 18,
         "title_alignment": "center",
         "card_text_transform": "uppercase",
         "item_color": "#000000",
