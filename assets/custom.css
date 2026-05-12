@@ -93,7 +93,7 @@
   text-transform: uppercase;
 }
 
-.collection-list {
+.collection-list, .featured_collections {
   gap: 0;
 }
 
