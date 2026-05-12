@@ -288,6 +288,17 @@
     "fashion_blogs_DjJMYw": {
       "type": "Fashion-Blogs",
       "blocks": {
+        "blog_dzVBpz": {
+          "type": "blog",
+          "settings": {
+            "image": "shopify://shop_images/blog-5-b055cdc1-ee65-4f9a-9999-1c7360dd8629.png",
+            "date": "06 Mar",
+            "title": "Why do we use it?",
+            "text": "Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt...",
+            "button_text": "READ MORE",
+            "button_link": ""
+          }
+        },
         "blog_6MN3DF": {
           "type": "blog",
           "settings": {
@@ -323,6 +334,7 @@
         }
       },
       "block_order": [
+        "blog_dzVBpz",
         "blog_6MN3DF",
         "blog_Kan6Ya",
         "blog_L3LM8d"
