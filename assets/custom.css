@@ -274,6 +274,7 @@
   .product-grid-container .grid__item {
     border: 1px solid;
     border-radius: 10px;
+    overflow: hidden;
   }
 
   .product-grid-container .card__content {
