@@ -160,6 +160,8 @@
         "products_to_show": 12,
         "title": "New arrivals",
         "heading_size": "h1",
+        "text_alignment": "center",
+        "text_transform": "uppercase",
         "description": "",
         "show_description": false,
         "description_style": "body",
