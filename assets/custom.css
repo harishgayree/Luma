@@ -98,5 +98,5 @@
 }
 
 .slideshow__controls {
-  border: none;
+  border: none !important;
 }
