@@ -226,77 +226,56 @@
         "show_text_below": true
       }
     },
-    "custom_testimonials": {
-      "type": "custom-testimonials",
-      "name": "Custom Testimonials",
-      "settings": {
-        "heading": "TESTIMONIALS",
-        "heading_size": 48,
-        "heading_weight": "700",
-        "heading_transform": "uppercase",
-        "bg_color": "#f4f4f4",
-        "heading_color": "#111111",
-        "card_bg": "#ebebeb",
-        "card_border": "#e5e5e5",
-        "card_radius": 12,
-        "image_size": 90,
-        "star_color": "#ffb400",
-        "text_color": "#555555",
-        "text_size": 18,
-        "name_color": "#111111",
-        "name_size": 28,
-        "designation_color": "#666666",
-        "designation_size": 18,
-        "desktop_per_view": 3,
-        "space_between": 30,
-        "show_arrows": true,
-        "show_dots": true,
-        "arrow_bg": "#111111",
-        "arrow_color": "#ffffff",
-        "dot_color": "#999999",
-        "dot_active_color": "#111111",
-        "autoplay_speed": 3000,
-        "page_width": 1400,
-        "padding_top": 80,
-        "padding_bottom": 80
-      },
+    "fashion_blogs_DjJMYw": {
+      "type": "Fashion-Blogs",
       "blocks": {
-        "testimonial_1": {
-          "type": "review",
+        "blog_6MN3DF": {
+          "type": "blog",
           "settings": {
-            "image": "",
-            "name": "John Doe",
-            "designation": "Manager",
-            "review_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            "rating": 5
+            "date": "06 Mar",
+            "title": "Why do we use it?",
+            "text": "Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt...",
+            "button_text": "READ MORE",
+            "button_link": ""
           }
         },
-        "testimonial_2": {
-          "type": "review",
+        "blog_Kan6Ya": {
+          "type": "blog",
           "settings": {
-            "image": "",
-            "name": "Jane Smith",
-            "designation": "Designer",
-            "review_text": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            "rating": 5
+            "date": "06 Mar",
+            "title": "Why do we use it?",
+            "text": "Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt...",
+            "button_text": "READ MORE",
+            "button_link": ""
           }
         },
-        "testimonial_3": {
-          "type": "review",
+        "blog_L3LM8d": {
+          "type": "blog",
           "settings": {
-            "image": "",
-            "name": "Mike Johnson",
-            "designation": "Developer",
-            "review_text": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-            "rating": 5
+            "date": "06 Mar",
+            "title": "Why do we use it?",
+            "text": "Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt...",
+            "button_text": "READ MORE",
+            "button_link": ""
           }
         }
       },
       "block_order": [
-        "testimonial_1",
-        "testimonial_2",
-        "testimonial_3"
-      ]
+        "blog_6MN3DF",
+        "blog_Kan6Ya",
+        "blog_L3LM8d"
+      ],
+      "name": "Fashion Blogs",
+      "settings": {
+        "heading": "FASHION BLOGS",
+        "heading_size": 54,
+        "heading_color": "#111111",
+        "text_color": "#111111",
+        "bg_color": "#f5f5f5",
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
@@ -304,6 +283,6 @@
     "collection_list_bAAPVR",
     "custom_featured_collection_k9mcft",
     "image_banner_Ajm7nN",
-    "custom_testimonials"
+    "fashion_blogs_DjJMYw"
   ]
 }
