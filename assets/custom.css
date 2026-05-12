@@ -192,7 +192,7 @@
     flex-wrap: wrap;
   }
 
-  .custom-price .price-item--regular {
+  .custom-price .price-item--regular, .custom-price .price-item--sale  {
     font-size: 18px;
     font-weight: 700;
     color: var(--price-color);
