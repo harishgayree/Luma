@@ -115,3 +115,7 @@
 .featured_collections .card__content, .featured_collections .card-information {
   text-align: center;
 }
+
+.featured_collections .card__media {
+  border-bottom: 1px solid;
+}
