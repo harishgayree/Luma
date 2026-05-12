@@ -258,12 +258,23 @@
             "review": "Lorem ipsum dolor sit amet.",
             "rating": 5
           }
+        },
+        "review_MM4Tcc": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/blog-2-34e3470f-7ce0-48b4-b973-8ebc946ee208.png",
+            "name": "Chole",
+            "role": "Manager",
+            "review": "Lorem ipsum dolor sit amet.",
+            "rating": 5
+          }
         }
       },
       "block_order": [
         "review_bG98Jx",
         "review_fqccct",
-        "review_RxBDJq"
+        "review_RxBDJq",
+        "review_MM4Tcc"
       ],
       "name": "Custom Testimonials",
       "settings": {
