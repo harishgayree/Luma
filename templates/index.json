@@ -187,7 +187,7 @@
       "type": "custom-featured-collection",
       "name": "Custom Featured Collection",
       "settings": {
-        "collection": "ethnic-traditional-wear",
+        "collection": "tops-shirts",
         "heading": "NEW ARRIVALS",
         "products_to_show": 5,
         "desktop_columns": 5,
