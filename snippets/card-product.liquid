@@ -110,9 +110,18 @@
               {%- endif -%}
             </div>
             <div class="card-hover-buttons">
-              <button class="hover-btn quick-view-btn">
-                QUICK VIEW
-              </button>
+               <button
+                  id="{{ product_form_id }}-submit"
+                  type="submit"
+                  name="add"
+                  class="quick-add__submit button button--full-width button--secondary"
+                  aria-haspopup="dialog"
+                  aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
+                  data-product-url="{{ card_product.url }}"
+                >
+                  {{ 'products.product.choose_options' | t }}
+                  {%- render 'loading-spinner' -%}
+                </button>
 
               <button class="hover-btn add-cart-btn">
                 ADD TO CART
