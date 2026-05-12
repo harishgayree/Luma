@@ -119,3 +119,9 @@
 .featured_collections .card__media {
   border-bottom: 1px solid;
 }
+
+.collection-list {
+  border-radius: 10px;
+  border: 1px solid transparent;
+  overflow: hidden;
+}
