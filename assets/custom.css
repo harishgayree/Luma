@@ -108,7 +108,11 @@
 }
 
 @media (max-width: 767px) {
-  .announcement-bar__contact, .offer-box, .search-center-custom {
+  .announcement-bar__contact, .offer-box, .search-center-custom, .header:before {
    display: none;
+  }
+
+  .header--top-center {
+    grid-template-areas: "left-icons heading icons";
   }
 }
