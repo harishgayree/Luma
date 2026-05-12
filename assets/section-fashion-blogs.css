@@ -101,7 +101,7 @@
 .fashion-blog-right{
   display:flex;
   flex-direction:column;
-  gap:40px;
+  gap:25px;
   max-height: 700px;
   overflow-y: scroll;
 }
