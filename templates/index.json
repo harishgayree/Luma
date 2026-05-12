@@ -232,6 +232,7 @@
         "review_bG98Jx": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/review-1-a1474222-b4e3-49e9-996f-194cd4f3a2ba.png",
             "name": "John Doe",
             "role": "Manager",
             "review": "Lorem ipsum dolor sit amet.",
@@ -241,6 +242,7 @@
         "review_fqccct": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/review-2-aae1834b-c4ae-4e91-9aef-f263985c46e5.png",
             "name": "John Doe",
             "role": "Manager",
             "review": "Lorem ipsum dolor sit amet.",
@@ -250,6 +252,7 @@
         "review_RxBDJq": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/blog-6-a205441d-cd91-4048-ab96-d3de6b417981.png",
             "name": "John Doe",
             "role": "Manager",
             "review": "Lorem ipsum dolor sit amet.",
