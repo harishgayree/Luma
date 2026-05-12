@@ -59,6 +59,11 @@
       >
         {%- if card_product.featured_media -%}
           <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
+            <div class="card-hover-icons">
+              <button class="wishlist-btn">
+                ♡
+              </button>
+            </div>
             <div class="media media--transparent media--hover-effect">
               {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
               <img
@@ -103,6 +108,15 @@
                   height="{{ card_product.media[1].height }}"
                 >
               {%- endif -%}
+            </div>
+            <div class="card-hover-buttons">
+              <button class="hover-btn quick-view-btn">
+                QUICK VIEW
+              </button>
+
+              <button class="hover-btn add-cart-btn">
+                ADD TO CART
+              </button>
             </div>
           </div>
         {%- endif -%}
