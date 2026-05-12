@@ -112,11 +112,6 @@
     background: var(--bg-color);
   }
 
-  .custom-featured-collection .page-width {
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
   .custom-featured-heading {
     text-align:  var(--text-alignment);
     margin-bottom: 50px;
