@@ -28,13 +28,15 @@
   margin: 0;
 }
 
+
+
 .header--top-center {
   grid-template-areas:"heading left-icons icons" "navigation navigation navigation";
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 30px;
 }
 
-.header--top-center .header__heading {
+.header--top-center .header__heading, .header--top-center .header__heading-link {
   justify-self: flex-start;
   text-align: left;
 }
