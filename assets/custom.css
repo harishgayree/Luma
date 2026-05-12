@@ -100,3 +100,9 @@
 .slideshow__controls {
   border: none !important;
 }
+
+.collection-list {
+  border-radius: 10px;
+  border: 1px solid transparent;
+  overflow: hidden;
+}

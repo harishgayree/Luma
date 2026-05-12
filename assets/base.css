@@ -996,7 +996,7 @@ summary::-webkit-details-marker {
 
   .grid--5-col-desktop .grid__item {
     width: calc(20% - var(--grid-desktop-horizontal-spacing) * 4 / 5);
-    max-width: calc(20% - var(--grid-desktop-horizontal-spacing) * 4 / 5);
+    max-width: calc(21% - var(--grid-desktop-horizontal-spacing) * 4 / 5);
   }
 
   .grid--4-col-desktop .grid__item {
