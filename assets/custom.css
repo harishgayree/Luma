@@ -96,3 +96,7 @@
 .collection-list {
   gap: 0;
 }
+
+.slideshow__controls {
+  border: none;
+}
