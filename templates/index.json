@@ -170,7 +170,7 @@
         "bg_color": "#ffffff",
         "card_bg": "#ffffff",
         "border_color": "#121212",
-        "heading_color": "#111111",
+        "heading_color": "#000000",
         "text_color": "#111111",
         "price_color": "#111111",
         "button_bg": "#111111",
