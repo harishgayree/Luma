@@ -1,3 +1,4 @@
+
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 
 <style>
@@ -7,6 +8,7 @@
   }
 
   .custom-featured-collection .page-width {
+    max-width: {{ section.settings.page_width }}px;
     margin: 0 auto;
     padding: 0 20px;
   }
@@ -47,7 +49,8 @@
   .custom-product-image {
     position: relative;
     overflow: hidden;
-    padding: 0;
+    padding: 20px;
+    min-height: 380px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,9 +58,10 @@
 
   .custom-product-image img {
     width: 100%;
+    max-width: 100%;
+    max-height: 320px;
+    object-fit: contain;
     transition: transform .5s ease;
-    object-fit: cover;
-    height: 400px;
   }
 
   .custom-product-card:hover .custom-product-image img {
@@ -104,7 +108,7 @@
   .custom-hover-buttons {
     position: absolute;
     left: 50%;
-    bottom: 35px;
+    bottom: 20px;
     transform: translateX(-50%) translateY(20px);
     display: flex;
     gap: 12px;
@@ -173,6 +177,26 @@
       grid-template-columns: repeat(2, 1fr);
     }
 
+    .custom-hover-buttons {
+      flex-direction: column;
+      width: calc(100% - 40px);
+      gap: 10px;
+      bottom: 15px;
+    }
+
+    .custom-hover-btn,
+    .custom-hover-buttons form {
+      width: 100%;
+    }
+
+    .custom-hover-btn {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 13px;
+      text-align: center;
+    }
+    }
+
     .custom-product-card:nth-child(2n) {
       border-right: 0;
     }
@@ -185,6 +209,11 @@
   @media screen and (max-width: 749px) {
     .custom-featured-grid {
       grid-template-columns: 1fr;
+    }
+
+    .custom-product-image img {
+      max-height: 260px;
+    }
     }
 
     .custom-product-card {
@@ -321,6 +350,15 @@
       "step": 1,
       "default": 5,
       "label": "Desktop columns"
+    },
+    {
+      "type": "range",
+      "id": "page_width",
+      "min": 1000,
+      "max": 1800,
+      "step": 20,
+      "default": 1600,
+      "label": "Page width"
     },
     {
       "type": "select",
