@@ -100,3 +100,7 @@
 .slideshow__controls {
   border: none !important;
 }
+
+.featured_collections .card-wrapper {
+  border-inline-start: 1px solid;
+}
