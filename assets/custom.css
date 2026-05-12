@@ -106,3 +106,9 @@
   border: 1px solid transparent;
   overflow: hidden;
 }
+
+@media (max-width: 767px) {
+  .announcement-bar__contact, .offer-box, .search-center-custom {
+   display: none;
+  }
+}
