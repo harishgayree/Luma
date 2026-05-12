@@ -163,7 +163,7 @@
     width: 100%;
     transition: transform .5s ease;
     object-fit: cover;
-    height: 400px;
+    height: 350px;
   }
 
   .custom-product-card:hover .custom-product-image img {
