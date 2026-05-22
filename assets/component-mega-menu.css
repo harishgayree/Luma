@@ -83,15 +83,18 @@
 .mega-product-grid {
   display: grid;
   grid-template-columns: repeat(2,1fr);
+  gap: 12px;
 }
 
-.mega-product-card {
-  border: 1px solid #ddd;
+.mega-product-card a {
+  text-decoration: none;
 }
 
 .mega-product-image img {
-  width: 100%;
+  width: 210px;
   display: block;
+  height: 250px;
+  object-fit: cover;
 }
 
 .mega-product-info {
