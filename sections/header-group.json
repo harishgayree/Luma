@@ -41,6 +41,21 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "mega_menu_DePLVR": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_title": "Shop",
+            "heading": "Popular collection",
+            "collection": "ethnic-traditional-wear",
+            "product_1": "",
+            "product_2": ""
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_DePLVR"
+      ],
       "settings": {
         "logo_position": "top-center",
         "mobile_logo_position": "center",
