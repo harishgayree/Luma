@@ -4,9 +4,9 @@
 
 .custom-mega-dropdown {
   position: absolute;
-  left: -100%;
+  left: 0;
   top: 100%;
-  width: auto;
+  width: 100%;
   background: #fff;
   padding: 50px 0;
   opacity: 0;
