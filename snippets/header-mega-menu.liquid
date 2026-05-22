@@ -1,95 +1,174 @@
 {% comment %}
-  Renders a megamenu for the header.
-
-  Usage:
-  {% render 'header-mega-menu' %}
+  Custom Mega Menu
 {% endcomment %}
 
-<nav class="header__inline-menu">
+<nav class="header__inline-menu custom-mega-menu">
   <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}
-      <li>
-        {%- if link.links != blank -%}
-          <header-menu>
-            <details id="Details-HeaderMenu-{{ forloop.index }}" class="mega-menu">
-              <summary
-                id="HeaderMenu-{{ link.handle }}"
-                class="header__menu-item list-menu__item link focus-inset"
-                style="font-size:{{ section.settings.font-size }}px"
-              >
-                <span
-                  {%- if link.child_active %}
-                    class="header__active-menu-item"
-                  {% endif %}
-                >
-                  {{- link.title | escape -}}
-                </span>
-                {{- 'icon-caret.svg' | inline_asset_content -}}
-              </summary>
-              <div
-                id="MegaMenu-Content-{{ forloop.index }}"
-                class="mega-menu__content color-{{ section.settings.menu_color_scheme }} gradient motion-reduce global-settings-popup"
-                tabindex="-1"
-              >
-                <ul
-                  class="mega-menu__list page-width{% if link.levels == 1 %} mega-menu__list--condensed{% endif %}"
-                  role="list"
-                >
+      <li class="custom-mega-item">
+        
+        {%- assign mega_block = blank -%}
+
+        {% for block in section.blocks %}
+          {% if block.settings.menu_title == link.title %}
+            {% assign mega_block = block %}
+          {% endif %}
+        {% endfor %}
+
+        {% if link.links != blank %}
+
+          <div class="custom-mega-wrapper">
+
+            <a
+              href="{{ link.url }}"
+              class="header__menu-item list-menu__item link"
+            >
+              {{ link.title }}
+            </a>
+
+            <div class="custom-mega-dropdown">
+
+              <div class="page-width custom-mega-inner">
+
+                <!-- LEFT SIDE MENU -->
+                <div class="custom-mega-links">
+
                   {%- for childlink in link.links -%}
-                    <li>
+
+                    <div class="mega-column">
+
                       <a
-                        id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
                         href="{{ childlink.url }}"
-                        class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"
-                        {% if childlink.current %}
-                          aria-current="page"
-                        {% endif %}
+                        class="mega-heading"
                       >
-                        {{ childlink.title | escape }}
+                        {{ childlink.title }}
                       </a>
-                      {%- if childlink.links != blank -%}
-                        <ul class="list-unstyled" role="list">
-                          {%- for grandchildlink in childlink.links -%}
+
+                      {% if childlink.links != blank %}
+                        <ul class="mega-submenu">
+                          {% for grandchildlink in childlink.links %}
                             <li>
-                              <a
-                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                                href="{{ grandchildlink.url }}"
-                                class="mega-menu__link link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
-                                {% if grandchildlink.current %}
-                                  aria-current="page"
-                                {% endif %}
-                              >
-                                {{ grandchildlink.title | escape }}
+                              <a href="{{ grandchildlink.url }}">
+                                {{ grandchildlink.title }}
                               </a>
                             </li>
-                          {%- endfor -%}
+                          {% endfor %}
                         </ul>
-                      {%- endif -%}
-                    </li>
+                      {% endif %}
+
+                    </div>
+
                   {%- endfor -%}
-                </ul>
+
+                </div>
+
+                <!-- RIGHT SIDE PRODUCT / COLLECTION -->
+                {% if mega_block != blank %}
+                  <div class="custom-mega-product">
+
+                    <div class="mega-product-heading">
+                      {{ mega_block.settings.heading }}
+                    </div>
+
+                    <div class="mega-product-grid">
+
+                      {% if mega_block.settings.collection != blank %}
+                        
+                        {% assign collection = collections[mega_block.settings.collection] %}
+
+                        {% for product in collection.products limit: 2 %}
+                          
+                          <div class="mega-product-card">
+
+                            <a href="{{ product.url }}">
+
+                              <div class="mega-product-image">
+                                {{
+                                  product.featured_image
+                                  | image_url: width: 400
+                                  | image_tag
+                                }}
+                              </div>
+
+                              <div class="mega-product-info">
+                                <h4>{{ product.title }}</h4>
+
+                                <div class="price">
+                                  {{ product.price | money }}
+                                </div>
+
+                              </div>
+
+                            </a>
+
+                          </div>
+
+                        {% endfor %}
+
+                      {% elsif mega_block.settings.product_1 != blank or mega_block.settings.product_2 != blank %}
+
+                        {% assign products_array = 
+                          mega_block.settings.product_1.handle | append: ',' | append: mega_block.settings.product_2.handle | split: ',' 
+                        %}
+
+                        {% for handle in products_array %}
+                          
+                          {% assign product = all_products[handle] %}
+
+                          {% if product != blank %}
+
+                            <div class="mega-product-card">
+
+                              <a href="{{ product.url }}">
+
+                                <div class="mega-product-image">
+                                  {{
+                                    product.featured_image
+                                    | image_url: width: 400
+                                    | image_tag
+                                  }}
+                                </div>
+
+                                <div class="mega-product-info">
+                                  <h4>{{ product.title }}</h4>
+
+                                  <div class="price">
+                                    {{ product.price | money }}
+                                  </div>
+
+                                </div>
+
+                              </a>
+
+                            </div>
+
+                          {% endif %}
+
+                        {% endfor %}
+
+                      {% endif %}
+
+                    </div>
+
+                  </div>
+                {% endif %}
+
               </div>
-            </details>
-          </header-menu>
-        {%- else -%}
+
+            </div>
+
+          </div>
+
+        {% else %}
+
           <a
-            id="HeaderMenu-{{ link.handle }}"
             href="{{ link.url }}"
-            class="header__menu-item list-menu__item link link--text focus-inset"
-            {% if link.current %}
-              aria-current="page"
-            {% endif %}
-            style="font-size:{{ section.settings.font-size }}px"
+            class="header__menu-item list-menu__item link"
           >
-            <span
-              {%- if link.current %}
-                class="header__active-menu-item"
-              {% endif %}
-            >
-              {{- link.title | escape -}}
-            </span>
+            {{ link.title }}
           </a>
-        {%- endif -%}
+
+        {% endif %}
       </li>
     {%- endfor -%}
   </ul>
