@@ -73,37 +73,38 @@
                     <div class="mega-product-grid">
 
                       {% if mega_block.settings.collection != blank %}
-                        
-                        {% assign collection = collections[mega_block.settings.collection] %}
 
-                        {% for product in collection.products limit: 2 %}
-                          
-                          <div class="mega-product-card">
+  {% assign collection_handle = mega_block.settings.collection.handle %}
+  {% assign mega_collection = collections[collection_handle] %}
 
-                            <a href="{{ product.url }}">
+  {% for product in mega_collection.products limit: 2 %}
 
-                              <div class="mega-product-image">
-                                {{
-                                  product.featured_image
-                                  | image_url: width: 400
-                                  | image_tag
-                                }}
-                              </div>
+    <div class="mega-product-card">
 
-                              <div class="mega-product-info">
-                                <h4>{{ product.title }}</h4>
+      <a href="{{ product.url }}">
 
-                                <div class="price">
-                                  {{ product.price | money }}
-                                </div>
+        <div class="mega-product-image">
+          {{
+            product.featured_image
+            | image_url: width: 400
+            | image_tag
+          }}
+        </div>
 
-                              </div>
+        <div class="mega-product-info">
+          <h4>{{ product.title }}</h4>
 
-                            </a>
+          <div class="price">
+            {{ product.price | money }}
+          </div>
 
-                          </div>
+        </div>
 
-                        {% endfor %}
+      </a>
+
+    </div>
+
+  {% endfor %}
 
                       {% elsif mega_block.settings.product_1 != blank or mega_block.settings.product_2 != blank %}
 
