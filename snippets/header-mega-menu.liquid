@@ -74,37 +74,47 @@
 
                       {% if mega_block.settings.collection != blank %}
 
-  {% assign collection_handle = mega_block.settings.collection.handle %}
-  {% assign mega_collection = collections[collection_handle] %}
+  {% assign mega_collection = mega_block.settings.collection %}
 
-  {% for product in mega_collection.products limit: 2 %}
+  <div class="mega-product-card mega-collection-card">
 
-    <div class="mega-product-card">
+    <a href="{{ mega_collection.url }}">
 
-      <a href="{{ product.url }}">
+      <div class="mega-product-image">
 
-        <div class="mega-product-image">
+        {% if mega_collection.featured_image != blank %}
+
           {{
-            product.featured_image
-            | image_url: width: 400
+            mega_collection.featured_image
+            | image_url: width: 600
             | image_tag
           }}
-        </div>
 
-        <div class="mega-product-info">
-          <h4>{{ product.title }}</h4>
+        {% elsif mega_collection.products.first.featured_image != blank %}
 
-          <div class="price">
-            {{ product.price | money }}
-          </div>
+          {{
+            mega_collection.products.first.featured_image
+            | image_url: width: 600
+            | image_tag
+          }}
 
-        </div>
+        {% endif %}
 
-      </a>
+      </div>
 
-    </div>
+      <div class="mega-product-info">
 
-  {% endfor %}
+        <h4>{{ mega_collection.title }}</h4>
+
+        <p>
+          {{ mega_collection.products_count }} Products
+        </p>
+
+      </div>
+
+    </a>
+
+  </div>
 
                       {% elsif mega_block.settings.product_1 != blank or mega_block.settings.product_2 != blank %}
 
