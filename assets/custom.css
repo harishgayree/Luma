@@ -295,6 +295,10 @@
     border-bottom: 1px solid #000;
   }
 
+  .grid__item:nth-child(3), .grid__item:nth-child(6), .grid__item:nth-child(9), .grid__item:nth-child(12), .grid__item:nth-child(15), .grid__item:nth-child(18) {
+    border-right: none;
+  }
+
   @media screen and (max-width: 989px) {
     .custom-featured-grid {
       grid-template-columns: repeat(2, 1fr);
