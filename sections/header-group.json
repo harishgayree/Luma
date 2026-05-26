@@ -46,8 +46,8 @@
           "type": "mega_menu",
           "settings": {
             "menu_title": "Shop",
-            "heading": "Popular collection",
-            "collection": "",
+            "heading": "Collections",
+            "collection": "ethnic-traditional-wear",
             "product_1": "embroidered-anarkali-kurta",
             "product_2": ""
           }
