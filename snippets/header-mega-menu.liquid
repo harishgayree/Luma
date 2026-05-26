@@ -10,7 +10,9 @@
         {%- assign mega_block = blank -%}
 
         {% for block in section.blocks %}
-          {% if block.settings.menu_title == link.title %}
+          {% assign block_title = block.settings.menu_title | strip | downcase %}
+          {% assign link_title = link.title | strip | downcase %}
+          {% if block_title == link_title %}
             {% assign mega_block = block %}
           {% endif %}
         {% endfor %}
@@ -76,86 +78,94 @@
 
                         {% assign mega_collection = mega_block.settings.collection %}
                         {% if mega_collection.url == blank %}
-                          {% assign mega_collection = collections[mega_collection] %}
+                          {% if mega_collection.handle != blank %}
+                            {% assign mega_collection = collections[mega_collection.handle] %}
+                          {% else %}
+                            {% assign mega_collection = collections[mega_collection] %}
+                          {% endif %}
                         {% endif %}
 
-                        <div class="mega-product-card mega-collection-card">
+                        {% if mega_collection != blank %}
+                          <div class="mega-product-card mega-collection-card">
 
-                          <a href="{{ mega_collection.url }}">
+                            <a href="{{ mega_collection.url }}">
 
-                            <div class="mega-product-image">
+                              <div class="mega-product-image">
 
-                              {% if mega_collection.featured_image != blank %}
+                                {% if mega_collection.featured_image != blank %}
 
-                                {{
-                                  mega_collection.featured_image
-                                  | image_url: width: 600
-                                  | image_tag
-                                }}
+                                  {{
+                                    mega_collection.featured_image
+                                    | image_url: width: 600
+                                    | image_tag
+                                  }}
 
-                              {% elsif mega_collection.products.first.featured_image != blank %}
+                                {% elsif mega_collection.products.first.featured_image != blank %}
 
-                                {{
-                                  mega_collection.products.first.featured_image
-                                  | image_url: width: 600
-                                  | image_tag
-                                }}
+                                  {{
+                                    mega_collection.products.first.featured_image
+                                    | image_url: width: 600
+                                    | image_tag
+                                  }}
 
-                              {% endif %}
+                                {% endif %}
 
-                            </div>
+                              </div>
 
-                            <div class="mega-product-info">
+                              <div class="mega-product-info">
 
-                              <h4>{{ mega_collection.title }}</h4>
+                                <h4>{{ mega_collection.title }}</h4>
 
-                              <p>
-                                {{ mega_collection.products_count }} Products
-                              </p>
+                                <p>
+                                  {{ mega_collection.products_count }} Products
+                                </p>
 
-                            </div>
+                              </div>
 
-                          </a>
+                            </a>
 
-                        </div>
+                          </div>
+                        {% endif %}
 
                       {% elsif mega_block.settings.product_1 != blank or mega_block.settings.product_2 != blank %}
 
-                        {% assign products_array = 
-                          mega_block.settings.product_1.handle | append: ',' | append: mega_block.settings.product_2.handle | split: ',' 
-                        %}
+                        {% assign product_handle_1 = mega_block.settings.product_1.handle | default: mega_block.settings.product_1 %}
+                        {% assign product_handle_2 = mega_block.settings.product_2.handle | default: mega_block.settings.product_2 %}
+                        {% assign products_array = product_handle_1 | append: ',' | append: product_handle_2 | split: ',' %}
 
                         {% for handle in products_array %}
-                          
-                          {% assign product = all_products[handle] %}
+                          {% assign handle = handle | strip %}
+                          {% if handle != blank %}
+                            {% assign product = all_products[handle] %}
 
-                          {% if product != blank %}
+                            {% if product != blank %}
 
-                            <div class="mega-product-card">
+                              <div class="mega-product-card">
 
-                              <a href="{{ product.url }}">
+                                <a href="{{ product.url }}">
 
-                                <div class="mega-product-image">
-                                  {{
-                                    product.featured_image
-                                    | image_url: width: 400
-                                    | image_tag
-                                  }}
-                                </div>
-
-                                <div class="mega-product-info">
-                                  <h4>{{ product.title }}</h4>
-
-                                  <div class="price">
-                                    {{ product.price | money }}
+                                  <div class="mega-product-image">
+                                    {{
+                                      product.featured_image
+                                      | image_url: width: 400
+                                      | image_tag
+                                    }}
                                   </div>
 
-                                </div>
+                                  <div class="mega-product-info">
+                                    <h4>{{ product.title }}</h4>
 
-                              </a>
+                                    <div class="price">
+                                      {{ product.price | money }}
+                                    </div>
 
-                            </div>
+                                  </div>
 
+                                </a>
+
+                              </div>
+
+                            {% endif %}
                           {% endif %}
 
                         {% endfor %}
