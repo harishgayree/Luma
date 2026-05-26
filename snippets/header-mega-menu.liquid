@@ -74,47 +74,47 @@
 
                       {% if mega_block.settings.collection != blank %}
 
-  {% assign mega_collection = mega_block.settings.collection %}
+                        {% assign mega_collection = mega_block.settings.collection %}
 
-  <div class="mega-product-card mega-collection-card">
+                        <div class="mega-product-card mega-collection-card">
 
-    <a href="{{ mega_collection.url }}">
+                          <a href="{{ mega_collection.url }}">
 
-      <div class="mega-product-image">
+                            <div class="mega-product-image">
 
-        {% if mega_collection.featured_image != blank %}
+                              {% if mega_collection.featured_image != blank %}
 
-          {{
-            mega_collection.featured_image
-            | image_url: width: 600
-            | image_tag
-          }}
+                                {{
+                                  mega_collection.featured_image
+                                  | image_url: width: 600
+                                  | image_tag
+                                }}
 
-        {% elsif mega_collection.products.first.featured_image != blank %}
+                              {% elsif mega_collection.products.first.featured_image != blank %}
 
-          {{
-            mega_collection.products.first.featured_image
-            | image_url: width: 600
-            | image_tag
-          }}
+                                {{
+                                  mega_collection.products.first.featured_image
+                                  | image_url: width: 600
+                                  | image_tag
+                                }}
 
-        {% endif %}
+                              {% endif %}
 
-      </div>
+                            </div>
 
-      <div class="mega-product-info">
+                            <div class="mega-product-info">
 
-        <h4>{{ mega_collection.title }}</h4>
+                              <h4>{{ mega_collection.title }}</h4>
 
-        <p>
-          {{ mega_collection.products_count }} Products
-        </p>
+                              <p>
+                                {{ mega_collection.products_count }} Products
+                              </p>
 
-      </div>
+                            </div>
 
-    </a>
+                          </a>
 
-  </div>
+                        </div>
 
                       {% elsif mega_block.settings.product_1 != blank or mega_block.settings.product_2 != blank %}
 
