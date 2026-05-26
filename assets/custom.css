@@ -282,13 +282,13 @@
   }
 
   .product-grid-container .grid__item {
-    border: 1px solid;
-    border-radius: 10px;
+    border-right: 1px solid var(--border-color);
+    border-radius: 0;
     overflow: hidden;
   }
 
   .product-grid-container .card__content {
-    border-bottom: 1px solid;
+    border-bottom: 1px solid var(--border-color);
   }
 
   @media screen and (max-width: 989px) {
