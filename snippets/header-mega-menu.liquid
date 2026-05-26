@@ -75,6 +75,9 @@
                       {% if mega_block.settings.collection != blank %}
 
                         {% assign mega_collection = mega_block.settings.collection %}
+                        {% if mega_collection.url == blank %}
+                          {% assign mega_collection = collections[mega_collection] %}
+                        {% endif %}
 
                         <div class="mega-product-card mega-collection-card">
 
