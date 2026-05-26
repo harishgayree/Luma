@@ -282,22 +282,13 @@
   }
 
   .product-grid-container .grid__item {
-    border-right: 1px solid #000;
-    border-radius: 0;
+    border: 1px solid;
+    border-radius: 10px;
     overflow: hidden;
   }
 
-  #product-grid {
-    gap: 0;
-    border: 1px solid;
-  }
-
   .product-grid-container .card__content {
-    border-bottom: 1px solid #000;
-  }
-
-  .grid__item:nth-child(3), .grid__item:nth-child(6), .grid__item:nth-child(9), .grid__item:nth-child(12), .grid__item:nth-child(15), .grid__item:nth-child(18) {
-    border-right: none;
+    border-bottom: 1px solid;
   }
 
   @media screen and (max-width: 989px) {
