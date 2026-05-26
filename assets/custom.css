@@ -242,7 +242,9 @@
     transition: .3s ease;
     max-height: 45px;
     min-height: 45px;
-
+    display: flex;
+    align-items: center;
+    font-family: sans-serif;
   }
 
   .custom-hover-btn:hover {
