@@ -287,8 +287,8 @@
     overflow: hidden;
   }
 
-  .product-grid-container .card__content {
-    border-bottom: 1px solid;
+  .product-grid-container .card__inner {
+    border-bottom: 1px solid !important;
   }
 
   @media screen and (max-width: 989px) {
