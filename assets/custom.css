@@ -287,6 +287,10 @@
     overflow: hidden;
   }
 
+  #product-grid {
+    gap: 0;
+  }
+
   .product-grid-container .card__content {
     border-bottom: 1px solid #000;
   }
