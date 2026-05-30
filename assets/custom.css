@@ -356,6 +356,13 @@
     position: absolute;
   }
 
+  .banner__kicker svg text {
+    font-weight: 600;
+    font-size: 25px;
+    fill: #222222;
+    letter-spacing: 6px;
+  }
+
  .banner__kicker p {
     display: none;
   }
