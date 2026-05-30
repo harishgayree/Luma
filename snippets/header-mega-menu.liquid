@@ -28,9 +28,10 @@
 
             <a
               href="{{ link.url }}"
-              class="header__menu-item list-menu__item link"
+              class="header__menu-item list-menu__item link custom-menu-item--has-children"
             >
-              {{ link.title }}
+              <span>{{ link.title | escape }}</span>
+              {{- 'icon-caret.svg' | inline_asset_content -}}
             </a>
 
             <div class="custom-mega-dropdown">
@@ -193,7 +194,7 @@
             <a
               href="{{ link.url }}"
               id="HeaderMenu-{{ link.handle }}"
-              class="header__menu-item list-menu__item link focus-inset"
+              class="header__menu-item list-menu__item link focus-inset custom-menu-item--has-children"
               style="font-size:{{ section.settings.font-size }}px"
             >
               <span
@@ -203,6 +204,7 @@
               >
                 {{- link.title | escape -}}
               </span>
+              {{- 'icon-caret.svg' | inline_asset_content -}}
             </a>
 
             <div class="custom-dropdown-panel color-{{ section.settings.menu_color_scheme }} gradient">

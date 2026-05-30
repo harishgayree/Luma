@@ -113,6 +113,26 @@
   color: #000;
 }
 
+/* Caret on top-level items with submenu */
+.custom-menu-item--has-children {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.custom-menu-item--has-children .icon-caret {
+  position: static;
+  height: 0.6rem;
+  width: 0.6rem;
+  flex-shrink: 0;
+  margin-left: 0.2rem;
+  transition: transform 0.35s ease;
+}
+
+.custom-mega-item:hover .custom-menu-item--has-children .icon-caret {
+  transform: rotate(180deg);
+}
+
 /* Hover dropdown (non-mega menu items) */
 .custom-dropdown-wrapper {
   position: relative;
