@@ -568,6 +568,11 @@
     height: 22px;
   }
   
+  .banner__text {
+    font-size: 18px;
+    font-family: sans-serif;
+  }
+
   @media screen and (max-width: 991px){
   
     .custom-mega-dropdown,
