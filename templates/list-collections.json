@@ -12,7 +12,7 @@
     "main": {
       "type": "main-list-collections",
       "settings": {
-        "title": "Collections",
+        "title": "",
         "sort": "date_reversed",
         "image_ratio": "portrait",
         "columns_desktop": 5,
