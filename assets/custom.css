@@ -315,7 +315,7 @@
     display: none;
   }
 
-  .slideshow .banner__buttons .button {
+  .banner__buttons .button {
     font-size: 20px;
     border-radius: 5px;
     min-height: 5.5rem;
