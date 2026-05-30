@@ -1,7 +1,10 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'quick-add.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
 
-<section class="custom-featured-collection"
-  style="
+<section class="custom-featured-collection"  style="
     --border-color: {{ section.settings.border_color }};
     --btn-background: {{ section.settings.button_bg }};
     --button-text: {{ section.settings.button_text }};
@@ -29,9 +32,9 @@
     <div class="custom-featured-grid">
 
       {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
+        {% assign quick_view_form_id = 'quick-add-' | append: section.id | append: product.id %}
 
         <div class="custom-product-card">
-
           <a href="{{ product.url }}" class="custom-wishlist">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 21s-6.716-4.35-9.428-8.428C-1.227 6.856 3.108 1 8.286 4.286L12 8l3.714-3.714C20.892 1 25.227 6.856 21.428 12.572 18.716 16.65 12 21 12 21z"/>
@@ -52,9 +55,40 @@
 
             <div class="custom-hover-buttons">
 
-              <a href="{{ product.url }}" class="custom-hover-btn">
-                QUICK VIEW
-              </a>
+              <div class="quick-add no-js-hidden custom-quick-add">
+                <modal-opener data-modal="#QuickAdd-{{ product.id }}">
+                  <button
+                    id="{{ quick_view_form_id }}-submit"
+                    type="button"
+                    class="custom-hover-btn"
+                    aria-haspopup="dialog"
+                    aria-labelledby="{{ quick_view_form_id }}-submit custom-title-{{ section.id }}-{{ product.id }}"
+                    data-product-url="{{ product.url }}"
+                  >
+                    QUICK VIEW
+                    {%- render 'loading-spinner' -%}
+                  </button>
+                </modal-opener>
+                <quick-add-modal id="QuickAdd-{{ product.id }}" class="quick-add-modal">
+                  <div
+                    role="dialog"
+                    aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}"
+                    aria-modal="true"
+                    class="quick-add-modal__content global-settings-popup"
+                    tabindex="-1"
+                  >
+                    <button
+                      id="ModalClose-{{ product.id }}"
+                      type="button"
+                      class="quick-add-modal__toggle"
+                      aria-label="{{ 'accessibility.close' | t }}"
+                    >
+                      {{- 'icon-close.svg' | inline_asset_content -}}
+                    </button>
+                    <div id="QuickAddInfo-{{ product.id }}" class="quick-add-modal__content-info"></div>
+                  </div>
+                </quick-add-modal>
+              </div>
 
               {% if product.available %}
                 <product-form>
@@ -78,11 +112,10 @@
 
           <div class="custom-product-info">
             <h3 class="custom-product-title">
-              <a href="{{ product.url }}">
+              <a id="custom-title-{{ section.id }}-{{ product.id }}" href="{{ product.url }}">
                 {{ product.title }}
               </a>
             </h3>
-
             <div class="custom-price">
               {% render 'price', product: product %}
             </div>
