@@ -641,11 +641,23 @@
     font-size: 17px;
     font-family: sans-serif;
     font-weight: 600;
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
   }
 
   .product-form__submit:after, .product-form__submit:before, .product-form__submit:hover::after {
     box-shadow: none !important;
  }
+
+ .shopify-payment-button__button {
+    background: transparent;
+    color: #000;
+    text-transform: uppercase;
+    font-size: 17px;
+    font-family: sans-serif;
+    font-weight: 600;
+  }
 
   @media screen and (max-width: 991px){
   
