@@ -659,6 +659,7 @@
     font-weight: 600;
     border: 1px solid;
     border-radius: 5px !important;
+    transition: all .5s;
   }
 
   .shopify-payment-button__button:hover {
