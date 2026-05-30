@@ -678,6 +678,10 @@
     box-shadow: none !important;
   }
 
+  .shopify-policy__container {
+    max-width: 160ch;
+  }
+
   @media screen and (max-width: 991px){
   
     .custom-mega-dropdown,
