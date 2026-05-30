@@ -340,6 +340,26 @@
     line-height: 1;
   }
 
+  .banner__kicker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-transform: uppercase;
+    margin-top: 0;
+    position: relative;
+  }
+
+  .banner__kicker svg {
+    width: 100%;
+    height: 200px;
+    position: absolute;
+  }
+
+ .banner__kicker p {
+    display: none;
+  }
+
   .custom-mega-wrapper {
     position: static;
   }
