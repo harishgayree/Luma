@@ -61,8 +61,41 @@
                     </div>
 
                   {%- endfor -%}
-
                 </div>
+
+
+              {% if link.links == 'pages' | downcase  %}
+                <div class="custom-mega-linkss">
+
+                  {%- for childlink in link.links -%}
+
+                    <div class="mega-column">
+
+                      <a
+                        href="{{ childlink.url }}"
+                        class="mega-heading"
+                      >
+                        {{ childlink.title }}
+                      </a>
+
+                      {% if childlink.links != blank %}
+                        <ul class="mega-submenu">
+                          {% for grandchildlink in childlink.links %}
+                            <li>
+                              <a href="{{ grandchildlink.url }}">
+                                {{ grandchildlink.title }}
+                              </a>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+
+                    </div>
+
+                  {%- endfor -%}
+                </div>
+              {% endif %}
+
 
                 <!-- RIGHT SIDE PRODUCT / COLLECTION -->
                 {% if mega_block != blank %}
