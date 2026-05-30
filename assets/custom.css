@@ -315,6 +315,16 @@
     display: none;
   }
 
+  .banner__buttons .button {
+    font-size: 20px;
+    border-radius: 5px;
+    min-height: 5.5rem;
+  }
+
+  .banner__buttons .button::after, .banner__buttons .button::before, .banner__buttons .button:hover::after  {
+    box-shadow: none !important;
+  }
+
   @media screen and (max-width: 989px) {
     .custom-featured-grid {
       grid-template-columns: repeat(2, 1fr);
