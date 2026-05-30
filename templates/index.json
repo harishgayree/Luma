@@ -159,7 +159,7 @@
       "settings": {
         "collection": "tops-shirts",
         "heading": "NEW ARRIVALS",
-        "products_to_show": 5,
+        "products_to_show": 7,
         "desktop_columns": 5,
         "heading_alignment": "center",
         "heading_transform": "uppercase",
