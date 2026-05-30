@@ -562,6 +562,11 @@
     visibility: visible;
     transform: translateX(0);
   }
+
+  .header__icons svg {
+    width: 22px;
+    height: 22px;
+  }
   
   @media screen and (max-width: 991px){
   
