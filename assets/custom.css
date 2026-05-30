@@ -321,7 +321,7 @@
     min-height: 5.5rem;
   }
 
-  .banner__buttons .button::after, .banner__buttons .button::before, .banner__buttons .button:hover::after  {
+  .banner__buttons .button:after, .banner__buttons .button:before, .banner__buttons .button:hover::after  {
     box-shadow: none !important;
   }
 
