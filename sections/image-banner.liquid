@@ -122,6 +122,15 @@
          {%- when 'kicker' -%}
             <div class="banner__kicker rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
               <p>{{ block.settings.kicker }}</p>
+              <svg viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Arc path for smooth top curve -->
+                <path id="text-arc" d="M 100 180 A 150 150 0 0 1 400 180" fill="transparent"></path>
+              </defs>
+                <text text-anchor="middle" font-size="25" font-weight="500" fill="#222" letter-spacing="6">
+                  <textPath href="#text-arc" startOffset="51%" class="textPath" style="color: #222222;">Looks we love</textPath>
+                </text>
+              </svg>
             </div>
           {%- when 'heading' -%}
             <h2
