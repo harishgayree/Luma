@@ -9,15 +9,20 @@
         
         {%- assign mega_block = blank -%}
 
+        {% assign link_title = link.title | strip | downcase %}
         {% for block in section.blocks %}
-          {% assign block_title = block.settings.menu_title | strip | downcase %}
-          {% assign link_title = link.title | strip | downcase %}
-          {% if block_title == link_title %}
-            {% assign mega_block = block %}
+          {% if block.type == 'mega_menu' %}
+            {% assign block_title = block.settings.menu_title | strip | downcase %}
+            {% if block_title != blank and block_title == link_title %}
+              {% assign mega_block = block %}
+              {% break %}
+            {% endif %}
           {% endif %}
         {% endfor %}
 
         {% if link.links != blank %}
+
+          {% if mega_block != blank %}
 
           <div class="custom-mega-wrapper">
 
@@ -181,6 +186,82 @@
             </div>
 
           </div>
+
+          {% else %}
+
+          <header-menu>
+            <details id="Details-HeaderMenu-{{ forloop.index }}">
+              <summary
+                id="HeaderMenu-{{ link.handle }}"
+                class="header__menu-item list-menu__item link focus-inset"
+                style="font-size:{{ section.settings.font-size }}px"
+              >
+                <span
+                  {%- if link.child_active %}
+                    class="header__active-menu-item"
+                  {% endif %}
+                >
+                  {{- link.title | escape -}}
+                </span>
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </summary>
+              <ul
+                id="HeaderMenu-MenuList-{{ forloop.index }}"
+                class="header__submenu list-menu list-menu--disclosure color-{{ section.settings.menu_color_scheme }} gradient caption-large motion-reduce global-settings-popup"
+                role="list"
+                tabindex="-1"
+              >
+                {%- for childlink in link.links -%}
+                  <li>
+                    {%- if childlink.links == blank -%}
+                      <a
+                        id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                        href="{{ childlink.url }}"
+                        class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}"
+                        {% if childlink.current %}
+                          aria-current="page"
+                        {% endif %}
+                      >
+                        {{ childlink.title | escape }}
+                      </a>
+                    {%- else -%}
+                      <details id="Details-HeaderSubMenu-{{ link.handle }}-{{ childlink.handle }}">
+                        <summary
+                          id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                          class="header__menu-item link link--text list-menu__item focus-inset caption-large"
+                        >
+                          <span>{{ childlink.title | escape }}</span>
+                          {{- 'icon-caret.svg' | inline_asset_content -}}
+                        </summary>
+                        <ul
+                          id="HeaderMenu-SubMenuList-{{ link.handle }}-{{ childlink.handle }}"
+                          class="header__submenu list-menu motion-reduce"
+                        >
+                          {%- for grandchildlink in childlink.links -%}
+                            <li>
+                              <a
+                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                href="{{ grandchildlink.url }}"
+                                class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if grandchildlink.current %} list-menu__item--active{% endif %}"
+                                {% if grandchildlink.current %}
+                                  aria-current="page"
+                                {% endif %}
+                                style="font-size:{{ section.settings.font-size }}px"
+                              >
+                                {{ grandchildlink.title | escape }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      </details>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </details>
+          </header-menu>
+
+          {% endif %}
 
         {% else %}
 
