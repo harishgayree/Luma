@@ -636,6 +636,17 @@
     font-family: sans-serif;
   }
 
+  .product-form__submit {
+    text-transform: uppercase;
+    font-size: 17px;
+    font-family: sans-serif;
+    font-weight: 600;
+  }
+
+  .product-form__submit:after, .product-form__submit:before, .product-form__submit:hover::after {
+    box-shadow: none !important;
+ }
+
   @media screen and (max-width: 991px){
   
     .custom-mega-dropdown,
