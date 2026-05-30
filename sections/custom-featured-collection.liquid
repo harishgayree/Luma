@@ -1,10 +1,46 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
 {{ 'quick-add.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
 
-<section class="custom-featured-collection"  style="
+{%- liquid
+  assign products_to_display = 0
+  if section.settings.collection != blank
+    assign products_to_display = section.settings.collection.products.size
+    if products_to_display > section.settings.products_to_show
+      assign products_to_display = section.settings.products_to_show
+    endif
+  endif
+
+  assign columns_mobile_int = section.settings.columns_mobile | plus: 0
+  assign columns_tablet_int = section.settings.columns_tablet | plus: 0
+  assign columns_desktop_int = section.settings.desktop_columns | plus: 0
+
+  assign grid_desktop_class = 'grid--' | append: columns_desktop_int | append: '-col-desktop'
+  assign grid_tablet_class = 'grid--' | append: columns_tablet_int | append: '-col-tablet'
+  assign grid_mobile_class = 'grid--' | append: columns_mobile_int | append: '-col-tablet-down'
+-%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  id="CustomFeatured-{{ section.id }}"
+  class="custom-featured-collection section-{{ section.id }}-padding"
+  style="
     --border-color: {{ section.settings.border_color }};
     --btn-background: {{ section.settings.button_bg }};
     --button-text: {{ section.settings.button_text }};
@@ -13,14 +49,15 @@
     --card-bg: {{ section.settings.card_bg }};
     --border-radius: {{ section.settings.card_radius }}px;
     --heading-color: {{ section.settings.heading_color }};
-    --desktop-columns: {{ section.settings.desktop_columns }};
+    --desktop-columns: {{ columns_desktop_int }};
+    --tablet-columns: {{ columns_tablet_int }};
+    --mobile-columns: {{ columns_mobile_int }};
     --heading-size: {{ section.settings.heading_size }}px;
     --heading-transform: {{ section.settings.heading_transform }};
     --text-alignment: {{ section.settings.heading_alignment }};
     --bg-color: {{ section.settings.bg_color }};
-    --padding-top: {{ section.settings.padding_top }}px;
-    --padding-bottom: {{ section.settings.padding_bottom }}px;
-  ">
+  "
+>
   <div class="page-width">
 
     {% if section.settings.heading != blank %}
@@ -29,13 +66,23 @@
       </div>
     {% endif %}
 
-    <div class="custom-featured-grid">
+    {%- if section.settings.collection != blank and products_to_display > 0 -%}
+      <slider-component class="custom-featured-slider slider-mobile-gutter slider-component-desktop">
+        <div class="custom-featured-grid-outer">
+          <ul
+            id="Slider-{{ section.id }}"
+            class="custom-featured-grid grid grid--gapless product-grid slider slider--everywhere slider--desktop slider--tablet grid--peek contains-card contains-card--product {{ grid_desktop_class }} {{ grid_tablet_class }} {{ grid_mobile_class }}"
+            role="list"
+            aria-label="{{ section.settings.heading | default: 'Products' | escape }}"
+          >
+          {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
+            {% assign quick_view_form_id = 'quick-add-' | append: section.id | append: product.id %}
 
-      {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
-        {% assign quick_view_form_id = 'quick-add-' | append: section.id | append: product.id %}
-
-        <div class="custom-product-card">
-          <a href="{{ product.url }}" class="custom-wishlist">
+            <li
+              id="Slide-{{ section.id }}-{{ forloop.index }}"
+              class="grid__item slider__slide"
+            >
+              <div class="custom-product-card">          <a href="{{ product.url }}" class="custom-wishlist">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 21s-6.716-4.35-9.428-8.428C-1.227 6.856 3.108 1 8.286 4.286L12 8l3.714-3.714C20.892 1 25.227 6.856 21.428 12.572 18.716 16.65 12 21 12 21z"/>
             </svg>
@@ -121,14 +168,48 @@
             </div>
           </div>
 
+              </div>
+            </li>
+          {% endfor %}
+          </ul>
         </div>
 
-      {% endfor %}
-
-    </div>
+        {%- if products_to_display > 1 -%}
+          <div class="slider-buttons custom-featured-slider-buttons">
+            <button
+              type="button"
+              class="slider-button slider-button--prev"
+              name="previous"
+              aria-label="{{ 'general.slider.previous_slide' | t }}"
+              aria-controls="Slider-{{ section.id }}"
+            >
+              <span class="svg-wrapper">
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </span>
+            </button>
+            <div class="slider-counter caption">
+              <span class="slider-counter--current">1</span>
+              <span aria-hidden="true"> / </span>
+              <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
+              <span class="slider-counter--total">{{ products_to_display }}</span>
+            </div>
+            <button
+              type="button"
+              class="slider-button slider-button--next"
+              name="next"
+              aria-label="{{ 'general.slider.next_slide' | t }}"
+              aria-controls="Slider-{{ section.id }}"
+            >
+              <span class="svg-wrapper">
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </span>
+            </button>
+          </div>
+        {%- endif -%}
+      </slider-component>
+    {%- endif -%}
   </div>
 </section>
-
 {% schema %}
 {
   "name": "Custom FeaturedCollection",
@@ -159,8 +240,33 @@
       "min": 2,
       "max": 6,
       "step": 1,
-      "default": 5,
-      "label": "Desktop columns"
+      "default": 4,
+      "label": "Desktop columns (visible per slide)"
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 2,
+      "max": 3,
+      "step": 1,
+      "default": 2,
+      "label": "Tablet columns (visible per slide)"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Mobile columns (visible per slide)",
+      "options": [
+        {
+          "value": "1",
+          "label": "1 column"
+        },
+        {
+          "value": "2",
+          "label": "2 columns"
+        }
+      ],
+      "default": "1"
     },
     {
       "type": "select",
