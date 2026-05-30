@@ -180,6 +180,13 @@
     "image_banner_Ajm7nN": {
       "type": "image-banner",
       "blocks": {
+        "kicker_DNPTdN": {
+          "type": "kicker",
+          "settings": {
+            "kicker": "Looks we love",
+            "text_style": "body"
+          }
+        },
         "heading_FP9yYT": {
           "type": "heading",
           "settings": {
@@ -207,6 +214,7 @@
         }
       },
       "block_order": [
+        "kicker_DNPTdN",
         "heading_FP9yYT",
         "text_Mb4Qgg",
         "buttons_KqDYiN"
