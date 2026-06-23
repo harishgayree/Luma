@@ -156,7 +156,7 @@
                               {% capture option_value %}{{ value }}{% endcapture %}
                               {% if option.name contains 'Color' or option.name contains 'Colour' or value.swatch != blank %}
                                 <button type="button" class="custom-quick-view-modal__swatch-button{% if option_value == selected_value %} selected{% endif %}">
-                                  {% render 'swatch', swatch: value.swatch %}
+                                  {% render 'swatch', swatch: option.selected_value.swatch, shape: block.settings.swatch_shape %}
                                 </button>
                               {% else %}
                                 <button type="button" class="custom-quick-view-modal__pill{% if option_value == selected_value %} selected{% endif %}">
