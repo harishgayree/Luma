@@ -491,7 +491,7 @@
   .custom-quick-view-modal__pill,
   .custom-quick-view-modal__swatch-button {
     border: 1px solid rgba(var(--color-foreground), 0.12);
-    border-radius: 0.85rem;
+    border-radius: 0;
     background: rgb(var(--color-background));
     color: rgb(var(--color-foreground));
     font-size: 0.95rem;
@@ -514,7 +514,6 @@
     width: 3.25rem;
     height: 3.25rem;
     padding: 0.4rem;
-    border-radius: 50%;
     display: grid;
     place-items: center;
   }
@@ -557,10 +556,7 @@
       top: 0.75rem;
       right: 0.75rem;
     }
-  }
-</style>
-
-  @media (max-width: 900px) {
+    
     .custom-quick-view-modal__body {
       grid-template-columns: 1fr;
       padding: 1.5rem;
