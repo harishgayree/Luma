@@ -717,15 +717,16 @@
 
   .custom-quick-view-modal__pill.selected {
     border-color: rgb(var(--color-foreground));
-    background: rgba(var(--color-foreground), 0.06);
+    {% comment %} background: rgba(var(--color-foreground), 0.06); {% endcomment %}
   }
 
   .custom-quick-view-modal__swatch-button {
     width: 3.25rem;
     height: 3.25rem;
-    padding: 0.4rem;
+    padding: 0;
     display: grid;
     place-items: center;
+    border-radius: 50%;
   }
 
   .custom-quick-view-modal__swatch-button.selected {
@@ -736,6 +737,7 @@
   .custom-quick-view-modal__swatch-button .swatch {
     width: 100%;
     height: 100%;
+    border-radius: 50%;
   }
 
   .custom-quick-view-modal__add-to-cart {
