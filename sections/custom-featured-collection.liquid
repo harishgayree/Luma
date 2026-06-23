@@ -52,9 +52,15 @@
 
             <div class="custom-hover-buttons">
 
-              <a href="{{ product.url }}" class="custom-hover-btn">
-                QUICK VIEW
-              </a>
+              <modal-opener data-modal="#QuickViewModal-{{ product.id }}">
+                <button
+                  type="button"
+                  class="custom-hover-btn"
+                  aria-haspopup="dialog"
+                >
+                  QUICK VIEW
+                </button>
+              </modal-opener>
 
               {% if product.available %}
                 <product-form>
@@ -76,6 +82,90 @@
 
           </div>
 
+          <modal-dialog id="QuickViewModal-{{ product.id }}" class="custom-quick-view-modal media-modal">
+            <div
+              role="dialog"
+              aria-modal="true"
+              class="custom-quick-view-modal__content"
+              tabindex="-1"
+            >
+              <button
+                id="ModalClose-{{ product.id }}"
+                type="button"
+                class="custom-quick-view-modal__close"
+                aria-label="{{ 'accessibility.close' | t }}"
+              >
+                {{- 'icon-close.svg' | inline_asset_content -}}
+              </button>
+
+              <div class="custom-quick-view-modal__body">
+                <div class="custom-quick-view-modal__image">
+                  {% if product.featured_image != blank %}
+                    <img
+                      src="{{ product.featured_image | image_url: width: 1000 }}"
+                      alt="{{ product.title }}"
+                      loading="lazy"
+                      width="640"
+                      height="800"
+                    >
+                  {% endif %}
+                </div>
+
+                <div class="custom-quick-view-modal__info">
+                  <h2 class="custom-quick-view-modal__title">{{ product.title }}</h2>
+
+                  <div class="custom-price">
+                    {% render 'price', product: product %}
+                  </div>
+
+                  {% if product.vendor != blank %}
+                    <p class="custom-quick-view-modal__vendor">{{ product.vendor }}</p>
+                  {% endif %}
+
+                  {% if product.description != blank %}
+                    <div class="custom-quick-view-modal__description">
+                      {{ product.description | strip_html | truncate: 400 }}
+                    </div>
+                  {% endif %}
+
+                  {% if product.options_with_values != blank %}
+                    <div class="custom-quick-view-modal__options">
+                      {% for option in product.options_with_values %}
+                        <div class="custom-quick-view-modal__option">
+                          <span class="custom-quick-view-modal__option-label">{{ option.name }}:</span>
+                          <span class="custom-quick-view-modal__option-value">{{ option.values | first }}</span>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+
+                  {% if product.available %}
+                    <product-form>
+                      {% form 'product', product %}
+                        <input
+                          type="hidden"
+                          name="id"
+                          value="{{ product.selected_or_first_available_variant.id }}"
+                        >
+                        <button type="submit" class="button custom-quick-view-modal__add-to-cart">
+                          ADD TO CART
+                        </button>
+                      {% endform %}
+                    </product-form>
+                  {% else %}
+                    <button type="button" class="button button--disabled custom-quick-view-modal__sold-out" disabled>
+                      {{ 'products.product.sold_out' | t }}
+                    </button>
+                  {% endif %}
+
+                  <a href="{{ product.url }}" class="link custom-quick-view-modal__view-details">
+                    {{ 'products.product.view_full_details' | t }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </modal-dialog>
+
           <div class="custom-product-info">
             <h3 class="custom-product-title">
               <a href="{{ product.url }}">
@@ -95,6 +185,112 @@
     </div>
   </div>
 </section>
+
+<style>
+  .custom-quick-view-modal .custom-quick-view-modal__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    min-height: 100vh;
+  }
+
+  .custom-quick-view-modal__body {
+    width: min(1200px, 100%);
+    background: rgb(var(--color-background));
+    border-radius: 2rem;
+    box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.18);
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(320px, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+  }
+
+  .custom-quick-view-modal__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 1.5rem;
+    object-fit: cover;
+    display: block;
+  }
+
+  .custom-quick-view-modal__close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background: transparent;
+    border: none;
+    color: rgb(var(--color-foreground));
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .custom-quick-view-modal__title {
+    margin: 0 0 1rem;
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+
+  .custom-quick-view-modal__vendor,
+  .custom-quick-view-modal__description,
+  .custom-quick-view-modal__options,
+  .custom-quick-view-modal__view-details {
+    margin-top: 1rem;
+  }
+
+  .custom-quick-view-modal__vendor {
+    font-size: 0.95rem;
+    color: rgba(var(--color-foreground), 0.75);
+  }
+
+  .custom-quick-view-modal__description {
+    color: rgba(var(--color-foreground), 0.88);
+    line-height: 1.75;
+  }
+
+  .custom-quick-view-modal__options {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .custom-quick-view-modal__option {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.95rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(var(--color-foreground), 0.12);
+    border-radius: 1rem;
+    background: rgba(var(--color-foreground), 0.03);
+  }
+
+  .custom-quick-view-modal__add-to-cart {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .custom-quick-view-modal__view-details {
+    display: inline-block;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    .custom-quick-view-modal__body {
+      grid-template-columns: 1fr;
+      padding: 1.5rem;
+    }
+
+    .custom-quick-view-modal__close {
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+  }
+</style>
 
 {% schema %}
 {
