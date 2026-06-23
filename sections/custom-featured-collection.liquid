@@ -114,26 +114,57 @@
                 <div class="custom-quick-view-modal__info">
                   <h2 class="custom-quick-view-modal__title">{{ product.title }}</h2>
 
-                  <div class="custom-price">
-                    {% render 'price', product: product %}
+                  <div class="custom-quick-view-modal__price-row">
+                    <div class="custom-price">
+                      {% render 'price', product: product %}
+                    </div>
+                    {% if product.compare_at_price > product.price %}
+                      <span class="custom-quick-view-modal__sale-badge">Sale</span>
+                    {% endif %}
                   </div>
 
-                  {% if product.vendor != blank %}
-                    <p class="custom-quick-view-modal__vendor">{{ product.vendor }}</p>
-                  {% endif %}
+                  <p class="custom-quick-view-modal__meta">
+                    Tax included. Shipping calculated at checkout.
+                  </p>
+
+                  <p class="custom-quick-view-modal__stock">
+                    <span class="custom-quick-view-modal__stock-dot"></span>
+                    {% if product.selected_or_first_available_variant.inventory_quantity != blank %}
+                      {{ product.selected_or_first_available_variant.inventory_quantity }} in stock
+                    {% elsif product.available %}
+                      In stock
+                    {% else %}
+                      Out of stock
+                    {% endif %}
+                  </p>
 
                   {% if product.description != blank %}
                     <div class="custom-quick-view-modal__description">
-                      {{ product.description | strip_html | truncate: 400 }}
+                      {{ product.description | strip_html | truncate: 420 }}
                     </div>
                   {% endif %}
 
                   {% if product.options_with_values != blank %}
-                    <div class="custom-quick-view-modal__options">
+                    {% assign selected_options = product.selected_or_first_available_variant.selected_options %}
+                    <div class="custom-quick-view-modal__variants">
                       {% for option in product.options_with_values %}
-                        <div class="custom-quick-view-modal__option">
-                          <span class="custom-quick-view-modal__option-label">{{ option.name }}:</span>
-                          <span class="custom-quick-view-modal__option-value">{{ option.values | first }}</span>
+                        {% capture selected_value %}{% for selected in selected_options %}{% if selected.name == option.name %}{{ selected.value }}{% endif %}{% endfor %}{% endcapture %}
+                        <div class="custom-quick-view-modal__variant-group">
+                          <div class="custom-quick-view-modal__variant-label">{{ option.name }}:</div>
+                          <div class="custom-quick-view-modal__variant-values">
+                            {% for value in option.values %}
+                              {% capture option_value %}{{ value }}{% endcapture %}
+                              {% if option.name contains 'Color' or option.name contains 'Colour' or value.swatch != blank %}
+                                <button type="button" class="custom-quick-view-modal__swatch-button{% if option_value == selected_value %} selected{% endif %}">
+                                  {% render 'swatch', swatch: value.swatch %}
+                                </button>
+                              {% else %}
+                                <button type="button" class="custom-quick-view-modal__pill{% if option_value == selected_value %} selected{% endif %}">
+                                  {{ value }}
+                                </button>
+                              {% endif %}
+                            {% endfor %}
+                          </div>
                         </div>
                       {% endfor %}
                     </div>
@@ -220,18 +251,32 @@
     border-radius: 2rem;
     box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.18);
     display: grid;
-    grid-template-columns: minmax(280px, 1fr) minmax(320px, 1fr);
+    grid-template-columns: minmax(360px, 1fr) minmax(340px, 1fr);
     gap: 2rem;
     padding: 2rem;
     max-width: 1200px;
   }
 
+  .custom-quick-view-modal__image {
+    display: grid;
+    place-items: center;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    background: rgba(var(--color-foreground), 0.04);
+  }
+
   .custom-quick-view-modal__image img {
     width: 100%;
     height: auto;
-    border-radius: 1.5rem;
-    object-fit: cover;
+    max-height: 780px;
+    object-fit: contain;
     display: block;
+  }
+
+  .custom-quick-view-modal__info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
   }
 
   .custom-quick-view-modal__close {
@@ -249,43 +294,124 @@
   }
 
   .custom-quick-view-modal__title {
-    margin: 0 0 1rem;
-    font-size: 2rem;
-    line-height: 1.1;
+    margin: 0;
+    font-size: clamp(2rem, 2.5vw, 2.6rem);
+    line-height: 1.05;
   }
 
-  .custom-quick-view-modal__vendor,
-  .custom-quick-view-modal__description,
-  .custom-quick-view-modal__options,
-  .custom-quick-view-modal__view-details {
-    margin-top: 1rem;
+  .custom-quick-view-modal__price-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 
-  .custom-quick-view-modal__vendor {
+  .custom-quick-view-modal__sale-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(var(--color-foreground));
+    color: rgb(var(--color-background));
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .custom-quick-view-modal__meta {
+    margin: 0;
+    color: rgba(var(--color-foreground), 0.72);
+    line-height: 1.75;
     font-size: 0.95rem;
-    color: rgba(var(--color-foreground), 0.75);
+  }
+
+  .custom-quick-view-modal__stock {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+    font-weight: 600;
+    color: rgb(var(--color-foreground));
+  }
+
+  .custom-quick-view-modal__stock-dot {
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 50%;
+    background: #39b54a;
+    display: inline-block;
   }
 
   .custom-quick-view-modal__description {
     color: rgba(var(--color-foreground), 0.88);
     line-height: 1.75;
+    margin: 0;
   }
 
-  .custom-quick-view-modal__options {
+  .custom-quick-view-modal__variants {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .custom-quick-view-modal__variant-group {
     display: grid;
     gap: 0.75rem;
-    margin-top: 1.5rem;
   }
 
-  .custom-quick-view-modal__option {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
+  .custom-quick-view-modal__variant-label {
     font-size: 0.95rem;
-    padding: 0.85rem 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(var(--color-foreground), 0.8);
+  }
+
+  .custom-quick-view-modal__variant-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .custom-quick-view-modal__pill,
+  .custom-quick-view-modal__swatch-button {
     border: 1px solid rgba(var(--color-foreground), 0.12);
-    border-radius: 1rem;
-    background: rgba(var(--color-foreground), 0.03);
+    border-radius: 0.85rem;
+    background: rgb(var(--color-background));
+    color: rgb(var(--color-foreground));
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .custom-quick-view-modal__pill {
+    padding: 0.8rem 1rem;
+    min-width: 3.2rem;
+    white-space: nowrap;
+  }
+
+  .custom-quick-view-modal__pill.selected {
+    border-color: rgb(var(--color-foreground));
+    background: rgba(var(--color-foreground), 0.06);
+  }
+
+  .custom-quick-view-modal__swatch-button {
+    width: 3.25rem;
+    height: 3.25rem;
+    padding: 0.4rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+  }
+
+  .custom-quick-view-modal__swatch-button.selected {
+    border-color: rgb(var(--color-foreground));
+    box-shadow: 0 0 0 0.2rem rgba(var(--color-foreground), 0.12);
+  }
+
+  .custom-quick-view-modal__swatch-button .swatch {
+    width: 100%;
+    height: 100%;
   }
 
   .custom-quick-view-modal__add-to-cart {
@@ -294,9 +420,30 @@
   }
 
   .custom-quick-view-modal__view-details {
-    display: inline-block;
+    display: inline-flex;
     margin-top: 1rem;
   }
+
+  @media (max-width: 900px) {
+    .custom-quick-view-modal__body {
+      grid-template-columns: 1fr;
+      padding: 1.5rem;
+    }
+
+    .custom-quick-view-modal__image {
+      order: 2;
+    }
+
+    .custom-quick-view-modal__info {
+      order: 1;
+    }
+
+    .custom-quick-view-modal__close {
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+  }
+</style>
 
   @media (max-width: 900px) {
     .custom-quick-view-modal__body {
