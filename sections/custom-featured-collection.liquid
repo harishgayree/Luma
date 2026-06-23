@@ -154,9 +154,9 @@
                           <div class="custom-quick-view-modal__variant-values">
                             {% for value in option.values %}
                               {% capture option_value %}{{ value }}{% endcapture %}
-                              {% if option.name contains 'Color' or option.name contains 'Colour' or value.swatch != blank %}
-                                <button type="button" class="custom-quick-view-modal__swatch-button{% if option_value == selected_value %} selected{% endif %}">
-                                  {% render 'swatch', swatch: option.selected_value.swatch, shape: block.settings.swatch_shape %}
+                              {% if option.name contains 'Color' or option.name contains 'Colour' %}
+                                <button type="button" class="custom-quick-view-modal__swatch-button{% if option_value == selected_value %} selected{% endif %}" style="--swatch-color: var(--color-{{ value | downcase | replace: ' ', '-' }}, #ccc);" title="{{ value }}">
+                                  <span class="swatch" style="background-color: var(--swatch-color);"></span>
                                 </button>
                               {% else %}
                                 <button type="button" class="custom-quick-view-modal__pill{% if option_value == selected_value %} selected{% endif %}">
@@ -218,6 +218,25 @@
 </section>
 
 <style>
+  /* Color definitions for swatches */
+  :root {
+    --color-red: #ff0000;
+    --color-blue: #0000ff;
+    --color-green: #00aa00;
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-gray: #808080;
+    --color-pink: #ffb6c1;
+    --color-yellow: #ffff00;
+    --color-orange: #ff8c00;
+    --color-purple: #800080;
+    --color-brown: #a52a2a;
+    --color-navy: #000080;
+    --color-beige: #f5f5dc;
+    --color-khaki: #f0e68c;
+    --color-olive: #808000;
+  }
+
   .custom-quick-view-modal {
     position: fixed;
     inset: 0;
