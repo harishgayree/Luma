@@ -131,7 +131,7 @@
       "name": "t:sections.collection-list.presets.name",
       "settings": {
         "title": "<strong>Shop by categories</strong>",
-        "heading_size": "h0",
+        "heading_size": "h1",
         "text_alignment": "center",
         "text_transform": "uppercase",
         "image_ratio": "portrait",
