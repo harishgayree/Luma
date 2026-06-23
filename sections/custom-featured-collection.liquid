@@ -89,16 +89,16 @@
               class="custom-quick-view-modal__content"
               tabindex="-1"
             >
-              <button
-                id="ModalClose-{{ product.id }}"
-                type="button"
-                class="custom-quick-view-modal__close"
-                aria-label="{{ 'accessibility.close' | t }}"
-              >
-                {{- 'icon-close.svg' | inline_asset_content -}}
-              </button>
 
               <div class="custom-quick-view-modal__body">
+                  <button
+                    id="ModalClose-{{ product.id }}"
+                    type="button"
+                    class="custom-quick-view-modal__close"
+                    aria-label="{{ 'accessibility.close' | t }}"
+                  >
+                    {{- 'icon-close.svg' | inline_asset_content -}}
+                  </button>
                 <div class="custom-quick-view-modal__image-section">
                   <div class="custom-quick-view-modal__image-container">
                     <button class="custom-quick-view-modal__image-nav custom-quick-view-modal__image-nav--prev" aria-label="Previous image">
@@ -472,6 +472,7 @@
     gap: 2rem;
     padding: 2rem;
     max-width: 970px;
+    position: relative;
   }
 
   .custom-quick-view-modal__image-section {
