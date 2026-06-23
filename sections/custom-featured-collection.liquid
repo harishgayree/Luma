@@ -146,20 +146,33 @@
 
                   {% if product.options_with_values != blank %}
                     {% assign selected_options = product.selected_or_first_available_variant.selected_options %}
-                    <div class="custom-quick-view-modal__variants">
+                    <div class="custom-quick-view-modal__variants" data-product-id="{{ product.id }}">
+                      <input type="hidden" class="variant-id-input" value="{{ product.selected_or_first_available_variant.id }}">
                       {% for option in product.options_with_values %}
                         {% capture selected_value %}{% for selected in selected_options %}{% if selected.name == option.name %}{{ selected.value }}{% endif %}{% endfor %}{% endcapture %}
                         <div class="custom-quick-view-modal__variant-group">
                           <div class="custom-quick-view-modal__variant-label">{{ option.name }}:</div>
-                          <div class="custom-quick-view-modal__variant-values">
+                          <div class="custom-quick-view-modal__variant-values" data-option-name="{{ option.name }}">
                             {% for value in option.values %}
                               {% capture option_value %}{{ value }}{% endcapture %}
                               {% if option.name contains 'Color' or option.name contains 'Colour' %}
-                                <button type="button" class="custom-quick-view-modal__swatch-button{% if option_value == selected_value %} selected{% endif %}" style="--swatch-color: var(--color-{{ value | downcase | replace: ' ', '-' }}, #ccc);" title="{{ value }}">
+                                <button 
+                                  type="button" 
+                                  class="custom-quick-view-modal__swatch-button{% if option_value == selected_value %} selected{% endif %}" 
+                                  data-option-value="{{ value }}"
+                                  data-option-name="{{ option.name }}"
+                                  style="--swatch-color: var(--color-{{ value | downcase | replace: ' ', '-' }}, #ccc);" 
+                                  title="{{ value }}"
+                                >
                                   <span class="swatch" style="background-color: var(--swatch-color);"></span>
                                 </button>
                               {% else %}
-                                <button type="button" class="custom-quick-view-modal__pill{% if option_value == selected_value %} selected{% endif %}">
+                                <button 
+                                  type="button" 
+                                  class="custom-quick-view-modal__pill{% if option_value == selected_value %} selected{% endif %}"
+                                  data-option-value="{{ value }}"
+                                  data-option-name="{{ option.name }}"
+                                >
                                   {{ value }}
                                 </button>
                               {% endif %}
@@ -167,6 +180,10 @@
                           </div>
                         </div>
                       {% endfor %}
+                      
+                      <script type="application/json" class="product-variants-data">
+                        {{ product.variants | json }}
+                      </script>
                     </div>
                   {% endif %}
 
@@ -216,6 +233,85 @@
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Handle variant selection in quick view modal
+    const variantButtons = document.querySelectorAll(
+      '.custom-quick-view-modal__swatch-button, .custom-quick-view-modal__pill'
+    );
+
+    variantButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const variantContainer = this.closest('.custom-quick-view-modal__variants');
+        if (!variantContainer) return;
+
+        // Update selected state for this option group
+        const buttonGroup = this.closest('.custom-quick-view-modal__variant-values');
+        buttonGroup.querySelectorAll('button').forEach(btn => {
+          btn.classList.remove('selected');
+        });
+        this.classList.add('selected');
+
+        // Build selected options object
+        const optionElements = variantContainer.querySelectorAll('.custom-quick-view-modal__variant-group');
+        const selectedOptions = [];
+        
+        optionElements.forEach(group => {
+          const selectedBtn = group.querySelector('button.selected');
+          if (selectedBtn) {
+            selectedOptions.push(selectedBtn.dataset.optionValue);
+          }
+        });
+
+        // Find matching variant
+        const variantsData = JSON.parse(
+          variantContainer.querySelector('.product-variants-data').textContent
+        );
+        
+        // Match variant by comparing all options
+        const matchingVariant = variantsData.find(variant => {
+          return selectedOptions.every((selectedValue, idx) => {
+            return variant.options[idx] === selectedValue;
+          });
+        });
+
+        if (matchingVariant && matchingVariant.available) {
+          // Update all variant inputs within the modal
+          const modal = variantContainer.closest('.custom-quick-view-modal');
+          const variantInputs = modal.querySelectorAll('input[name="id"]');
+          variantInputs.forEach(input => {
+            input.value = matchingVariant.id;
+          });
+        }
+      });
+    });
+
+    // Set initial selected states from product data
+    document.querySelectorAll('.custom-quick-view-modal__variants').forEach(variantContainer => {
+      const variantsData = JSON.parse(
+        variantContainer.querySelector('.product-variants-data').textContent
+      );
+      const firstAvailable = variantsData.find(v => v.available);
+      
+      if (firstAvailable) {
+        firstAvailable.options.forEach((optionValue, idx) => {
+          const optionGroup = variantContainer.querySelectorAll('.custom-quick-view-modal__variant-group')[idx];
+          if (optionGroup) {
+            optionGroup.querySelectorAll('button').forEach(btn => {
+              btn.classList.remove('selected');
+              if (btn.dataset.optionValue === optionValue) {
+                btn.classList.add('selected');
+              }
+            });
+          }
+        });
+      }
+    });
+  });
+</script>
 
 <style>
   /* Color definitions for swatches */
