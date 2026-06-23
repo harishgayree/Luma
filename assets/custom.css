@@ -308,6 +308,10 @@
     height: 20px;
   }
 
+  .card-wrapper:hover a {
+    text-decoration: none;
+  }
+
   .product-grid-container .grid__item {
     border: 1px solid;
     border-radius: 10px;
