@@ -67,7 +67,7 @@
 .custom_field {
   font-size: 16px;
 }
-  
+
 .header {
   position: relative;
 }
@@ -465,7 +465,7 @@
   }
   
   .custom-mega-product {
-    width: 30%;
+    width: auto;
   }
   
   .mega-product-heading {
