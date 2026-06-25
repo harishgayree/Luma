@@ -104,6 +104,7 @@
   gap:25px;
   max-height: 700px;
   overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .small-blog-item{
@@ -134,7 +135,7 @@
 
 .small-blog-content p{
   margin:0 0 20px;
-  font-size:18px;
+  font-size:15px;
   line-height:1.7;
 }
 
