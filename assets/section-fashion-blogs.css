@@ -190,6 +190,11 @@
   .small-blog-image img {
     height: 230px;
   }
+
+  .blog-date {
+    font-size: 16px;
+    padding: 8px 18px;
+  }
 }
 
 @media screen and (max-width: 991px){
