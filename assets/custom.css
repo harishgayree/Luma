@@ -690,6 +690,12 @@
     text-align: center;
   }
 
+  @media (max-width: 1200px) {
+   .custom-mega-links {
+      gap: 20px;
+   }
+  }
+
   @media screen and (max-width: 991px){
   
     .custom-mega-dropdown,
