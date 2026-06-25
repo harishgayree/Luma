@@ -183,7 +183,7 @@
     font-size: 15px;
   }
 
-  .small-blog-item {
+  .small-blog-item, .fashion-blog-grid {
     gap: 20px;
   }
 
