@@ -161,11 +161,29 @@
   }
 
   .small-blog-content h3{
-    font-size:26px;
+    font-size:20px;
   }
 
   .small-blog-content p{
-    font-size:18px;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .small-blog-content .blog-date {
+    font-size: 15px;
+    margin-bottom: 11px;
+  }
+
+  .read-more-btn {
+    font-size: 15px;
+  }
+
+  .small-blog-item {
+    gap: 20px;
+  }
+
+  .small-blog-image img {
+    height: 230px;
   }
 }
 
