@@ -693,6 +693,7 @@
   @media (max-width: 1200px) {
    .custom-mega-links {
       gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
    }
   }
 
