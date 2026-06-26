@@ -152,6 +152,7 @@
     background: var(--card-bg);
     border-right: 1px solid var(--border-color);
     transition: all .3s ease;
+    margin-right: 0 !important;
   }
 
   .custom-product-card:last-child {
