@@ -1,8 +1,4 @@
-{{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
-
-{{ 'component-slider.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
 <section class="custom-featured-collection"
   style="
@@ -30,38 +26,192 @@
       </div>
     {% endif %}
 
-    {% assign product_count = 0 %}
-    {% if section.settings.collection != blank %}
-      {% assign product_count = section.settings.collection.products.size %}
-    {% endif %}
-    {% assign show_mobile_slider = product_count > 1 %}
+    <div class="custom-featured-grid">
 
-    <slider-component class="slider-mobile-gutter{% unless show_mobile_slider %} page-width{% endunless %}">
-      <ul
-        id="Slider-{{ section.id }}"
-        class="custom-featured-grid grid grid--{{ section.settings.desktop_columns }}-col-desktop grid--2-col-tablet-down{% if show_mobile_slider %} slider slider--tablet grid--peek{% endif %}"
-        role="list"
-        aria-label="{{ 'general.slider.name' | t }}"
-      >
       {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
 
-        <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="grid__item{% if show_mobile_slider %} slider__slide{% endif %}">
-          {% render 'card-product',
-            card_product: product,
-            media_aspect_ratio: 'adapt',
-            image_shape: 'rectangle',
-            lazy_load: false,
-            show_secondary_image: true,
-            show_vendor: false,
-            show_rating: false,
-            skip_styles: false,
-            section_id: section.id,
-            quick_add: 'standard'
-          %}
-        </li>
+        <div class="custom-product-card">
 
-      {% endfor %}
-      </ul>
+          <a href="{{ product.url }}" class="custom-wishlist">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 21s-6.716-4.35-9.428-8.428C-1.227 6.856 3.108 1 8.286 4.286L12 8l3.714-3.714C20.892 1 25.227 6.856 21.428 12.572 18.716 16.65 12 21 12 21z"/>
+            </svg>
+          </a>
+
+          <div class="custom-product-image">
+
+            {% if product.featured_image != blank %}
+              <img
+                src="{{ product.featured_image | image_url: width: 800 }}"
+                alt="{{ product.title }}"
+                loading="lazy"
+                width="400"
+                height="500"
+              >
+            {% endif %}
+
+            <div class="custom-hover-buttons">
+
+              <modal-opener data-modal="#QuickViewModal-{{ product.id }}">
+                <button
+                  type="button"
+                  class="custom-hover-btn"
+                  aria-haspopup="dialog"
+                >
+                  QUICK VIEW
+                </button>
+              </modal-opener>
+
+              {% if product.available %}
+                <product-form>
+                  {% form 'product', product %}
+                    <input
+                      type="hidden"
+                      name="id"
+                      value="{{ product.selected_or_first_available_variant.id }}"
+                    >
+
+                    <button type="submit" class="custom-hover-btn">
+                      ADD TO CART
+                    </button>
+                  {% endform %}
+                </product-form>
+              {% endif %}
+
+            </div>
+
+          </div>
+
+          <modal-dialog id="QuickViewModal-{{ product.id }}" class="custom-quick-view-modal media-modal">
+            <div
+              role="dialog"
+              aria-modal="true"
+              class="custom-quick-view-modal__content"
+              tabindex="-1"
+            >
+
+              <div class="custom-quick-view-modal__body">
+                  <button
+                    id="ModalClose-{{ product.id }}"
+                    type="button"
+                    class="custom-quick-view-modal__close"
+                    aria-label="{{ 'accessibility.close' | t }}"
+                  >
+                    {{- 'icon-close.svg' | inline_asset_content -}}
+                  </button>
+                <div class="custom-quick-view-modal__image-section">
+                  <div class="custom-quick-view-modal__image-container">
+                    <button class="custom-quick-view-modal__image-nav custom-quick-view-modal__image-nav--prev" aria-label="Previous image">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                      </svg>
+                    </button>
+                    
+                    <div class="custom-quick-view-modal__image">
+                      {% if product.images.size > 0 %}
+                        {% for image in product.images %}
+                          <img
+                            src="{{ image | image_url: width: 1000 }}"
+                            alt="{{ product.title }}"
+                            loading="lazy"
+                            width="600"
+                            height="700"
+                            class="product-image{% if forloop.first %} active{% endif %}"
+                            data-image-index="{{ forloop.index0 }}"
+                          >
+                        {% endfor %}
+                      {% elsif product.featured_image != blank %}
+                        <img
+                          src="{{ product.featured_image | image_url: width: 1000 }}"
+                          alt="{{ product.title }}"
+                          loading="lazy"
+                          width="600"
+                          height="700"
+                          class="product-image active"
+                          data-image-index="0"
+                        >
+                      {% endif %}
+                    </div>
+
+                    <button class="custom-quick-view-modal__image-nav custom-quick-view-modal__image-nav--next" aria-label="Next image">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                    </button>
+                  </div>
+
+                  {% if product.images.size > 1 %}
+                    <div class="custom-quick-view-modal__thumbnails">
+                      {% for image in product.images %}
+                        <button class="custom-quick-view-modal__thumbnail{% if forloop.first %} active{% endif %}" data-image-index="{{ forloop.index0 }}" aria-label="View image {{ forloop.index }}">
+                          <img
+                            src="{{ image | image_url: width: 100 }}"
+                            alt="{{ product.title }} thumbnail"
+                            loading="lazy"
+                            width="80"
+                            height="80"
+                          >
+                        </button>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+
+                <div class="custom-quick-view-modal__info">
+                  <h2 class="custom-quick-view-modal__title">{{ product.title }}</h2>
+
+                  <div class="custom-quick-view-modal__price-row">
+                    <div class="custom-price">
+                      {% render 'price', product: product %}
+                    </div>
+                    {% if product.compare_at_price > product.price %}
+                      <span class="custom-quick-view-modal__sale-badge">Sale</span>
+                    {% endif %}
+                  </div>
+
+                  <p class="custom-quick-view-modal__meta">
+                    Tax included. Shipping calculated at checkout.
+                  </p>
+
+                  <p class="custom-quick-view-modal__stock">
+                    <span class="custom-quick-view-modal__stock-dot"></span>
+                    {% if product.selected_or_first_available_variant.inventory_quantity != blank %}
+                      {{ product.selected_or_first_available_variant.inventory_quantity }} in stock
+                    {% elsif product.available %}
+                      In stock
+                    {% else %}
+                      Out of stock
+                    {% endif %}
+                  </p>
+
+                  {% if product.description != blank %}
+                    <div class="custom-quick-view-modal__description">
+                      {{ product.description | strip_html | truncate: 420 }}
+                    </div>
+                  {% endif %}
+
+                  {% if product.options_with_values != blank %}
+                    {% assign selected_options = product.selected_or_first_available_variant.selected_options %}
+                    <div class="custom-quick-view-modal__variants" data-product-id="{{ product.id }}">
+                      <input type="hidden" class="variant-id-input" value="{{ product.selected_or_first_available_variant.id }}">
+                      {% for option in product.options_with_values %}
+                        {% capture selected_value %}{% for selected in selected_options %}{% if selected.name == option.name %}{{ selected.value }}{% endif %}{% endfor %}{% endcapture %}
+                        <div class="custom-quick-view-modal__variant-group">
+                          <div class="custom-quick-view-modal__variant-label">{{ option.name }}:</div>
+                          <div class="custom-quick-view-modal__variant-values" data-option-name="{{ option.name }}">
+                            {% for value in option.values %}
+                              {% capture option_value %}{{ value }}{% endcapture %}
+                              {% if option.name contains 'Color' or option.name contains 'Colour' %}
+                                <button 
+                                  type="button" 
+                                  class="custom-quick-view-modal__swatch-button{% if option_value == selected_value %} selected{% endif %}" 
+                                  data-option-value="{{ value }}"
+                                  data-option-name="{{ option.name }}"
+                                  style="--swatch-color: var(--color-{{ value | downcase | replace: ' ', '-' }}, #ccc);" 
+                                  title="{{ value }}"
+                                >
+                                  <span class="swatch" style="background-color: var(--swatch-color);"></span>
+                                </button>
                               {% else %}
                                 <button 
                                   type="button" 
@@ -125,37 +275,8 @@
         </div>
 
       {% endfor %}
-      </div>
 
-      {% if show_mobile_slider %}
-        <div class="slider-buttons">
-          <button
-            type="button"
-            class="slider-button slider-button--prev"
-            name="previous"
-            aria-label="{{ 'general.slider.previous_slide' | t }}"
-            aria-controls="Slider-{{ section.id }}"
-          >
-            <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
-          </button>
-          <div class="slider-counter caption">
-            <span class="slider-counter--current">1</span>
-            <span aria-hidden="true"> / </span>
-            <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
-            <span class="slider-counter--total">{{ product_count }}</span>
-          </div>
-          <button
-            type="button"
-            class="slider-button slider-button--next"
-            name="next"
-            aria-label="{{ 'general.slider.next_slide' | t }}"
-            aria-controls="Slider-{{ section.id }}"
-          >
-            <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
-          </button>
-        </div>
-      {% endif %}
-    </slider-component>
+    </div>
   </div>
 </section>
 
@@ -312,169 +433,6 @@
     --color-beige: #f5f5dc;
     --color-khaki: #f0e68c;
     --color-olive: #808000;
-  }
-
-  .custom-featured-collection {
-    background: var(--bg-color);
-    padding: calc(var(--padding-top) * 1px) 0 calc(var(--padding-bottom) * 1px);
-  }
-
-  .custom-featured-heading {
-    margin-bottom: 1.75rem;
-    text-align: var(--text-alignment);
-  }
-
-  .custom-featured-heading h2 {
-    margin: 0;
-    color: var(--heading-color);
-    font-size: clamp(1.8rem, 2.5vw, 3.25rem);
-    letter-spacing: 0.02em;
-  }
-
-  .custom-featured-grid {
-    display: grid;
-    gap: 1.25rem;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  }
-
-  .custom-product-card {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    background: var(--card-bg);
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .custom-product-card:hover {
-    transform: translateY(-0.15rem);
-    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.08);
-  }
-
-  .custom-product-image {
-    position: relative;
-    display: block;
-  }
-
-  .custom-product-image img {
-    width: 100%;
-    display: block;
-    height: auto;
-  }
-
-  .custom-hover-buttons {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    position: absolute;
-    left: 50%;
-    bottom: 1rem;
-    transform: translateX(-50%);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
-    z-index: 2;
-    padding: 0.25rem 0.5rem;
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 999px;
-  }
-
-  .custom-product-card:hover .custom-hover-buttons,
-  .custom-product-card:focus-within .custom-hover-buttons {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(-0.15rem);
-  }
-
-  .custom-hover-btn {
-    border: none;
-    background: rgba(0, 0, 0, 0.82);
-    color: #fff;
-    padding: 0.8rem 1rem;
-    border-radius: 999px;
-    cursor: pointer;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 3.5rem;
-    min-height: 3.5rem;
-  }
-
-  .custom-product-info {
-    padding: 1rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .custom-product-title {
-    margin: 0;
-    font-size: 1rem;
-  }
-
-  .custom-product-title a {
-    color: var(--title-color);
-    text-decoration: none;
-  }
-
-  .custom-price {
-    color: var(--price-color);
-    font-weight: 700;
-    font-size: 1rem;
-  }
-
-  @media (max-width: 900px) {
-    .custom-featured-grid {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-
-    .custom-hover-buttons {
-      position: static;
-      transform: none;
-      opacity: 1;
-      visibility: visible;
-      width: 100%;
-      margin: 0.75rem 0 0;
-      background: transparent;
-      justify-content: center;
-      padding: 0;
-      border-radius: 0;
-    }
-
-    .custom-hover-btn {
-      min-width: 0;
-      flex: 1 1 45%;
-      max-width: 45%;
-      font-size: 0.8rem;
-    }
-
-    .custom-product-card:hover .custom-hover-buttons,
-    .custom-product-card:focus-within .custom-hover-buttons {
-      transform: none;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .custom-featured-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .custom-hover-btn {
-      flex: 1 1 100%;
-      max-width: 100%;
-    }
-
-    .custom-product-info {
-      padding: 1rem 0.75rem 1.25rem;
-    }
   }
 
   .custom-quick-view-modal {

@@ -65,7 +65,7 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 }
 
 .drawer.active .drawer__inner {
-  transform: translateX(-2px);
+  transform: translateX(0);
 }
 
 .drawer__header {
