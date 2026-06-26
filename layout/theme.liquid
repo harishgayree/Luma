@@ -374,5 +374,31 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    <script>
+      new Swiper('.custom-featured-slider', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+          },
+          990: {
+            slidesPerView: 4,
+          }
+        }
+      });
+    </script>
   </body>
 </html>

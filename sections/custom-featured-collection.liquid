@@ -26,256 +26,260 @@
       </div>
     {% endif %}
 
-    <div class="custom-featured-grid">
+    <div class="swiper custom-featured-slider">
+      <div class="swiper-wrapper custom-featured-grid">
 
-      {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
+        {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
 
-        <div class="custom-product-card">
+          <div class="swiper-slide custom-product-card">
 
-          <a href="{{ product.url }}" class="custom-wishlist">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 21s-6.716-4.35-9.428-8.428C-1.227 6.856 3.108 1 8.286 4.286L12 8l3.714-3.714C20.892 1 25.227 6.856 21.428 12.572 18.716 16.65 12 21 12 21z"/>
-            </svg>
-          </a>
+            <a href="{{ product.url }}" class="custom-wishlist">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 21s-6.716-4.35-9.428-8.428C-1.227 6.856 3.108 1 8.286 4.286L12 8l3.714-3.714C20.892 1 25.227 6.856 21.428 12.572 18.716 16.65 12 21 12 21z"/>
+              </svg>
+            </a>
 
-          <div class="custom-product-image">
+            <div class="custom-product-image">
 
-            {% if product.featured_image != blank %}
-              <img
-                src="{{ product.featured_image | image_url: width: 800 }}"
-                alt="{{ product.title }}"
-                loading="lazy"
-                width="400"
-                height="500"
-              >
-            {% endif %}
-
-            <div class="custom-hover-buttons">
-
-              <modal-opener data-modal="#QuickViewModal-{{ product.id }}">
-                <button
-                  type="button"
-                  class="custom-hover-btn"
-                  aria-haspopup="dialog"
+              {% if product.featured_image != blank %}
+                <img
+                  src="{{ product.featured_image | image_url: width: 800 }}"
+                  alt="{{ product.title }}"
+                  loading="lazy"
+                  width="400"
+                  height="500"
                 >
-                  QUICK VIEW
-                </button>
-              </modal-opener>
-
-              {% if product.available %}
-                <product-form>
-                  {% form 'product', product %}
-                    <input
-                      type="hidden"
-                      name="id"
-                      value="{{ product.selected_or_first_available_variant.id }}"
-                    >
-
-                    <button type="submit" class="custom-hover-btn">
-                      ADD TO CART
-                    </button>
-                  {% endform %}
-                </product-form>
               {% endif %}
+
+              <div class="custom-hover-buttons">
+
+                <modal-opener data-modal="#QuickViewModal-{{ product.id }}">
+                  <button
+                    type="button"
+                    class="custom-hover-btn"
+                    aria-haspopup="dialog"
+                  >
+                    QUICK VIEW
+                  </button>
+                </modal-opener>
+
+                {% if product.available %}
+                  <product-form>
+                    {% form 'product', product %}
+                      <input
+                        type="hidden"
+                        name="id"
+                        value="{{ product.selected_or_first_available_variant.id }}"
+                      >
+
+                      <button type="submit" class="custom-hover-btn">
+                        ADD TO CART
+                      </button>
+                    {% endform %}
+                  </product-form>
+                {% endif %}
+
+              </div>
 
             </div>
 
-          </div>
+            <modal-dialog id="QuickViewModal-{{ product.id }}" class="custom-quick-view-modal media-modal">
+              <div
+                role="dialog"
+                aria-modal="true"
+                class="custom-quick-view-modal__content"
+                tabindex="-1"
+              >
 
-          <modal-dialog id="QuickViewModal-{{ product.id }}" class="custom-quick-view-modal media-modal">
-            <div
-              role="dialog"
-              aria-modal="true"
-              class="custom-quick-view-modal__content"
-              tabindex="-1"
-            >
-
-              <div class="custom-quick-view-modal__body">
-                  <button
-                    id="ModalClose-{{ product.id }}"
-                    type="button"
-                    class="custom-quick-view-modal__close"
-                    aria-label="{{ 'accessibility.close' | t }}"
-                  >
-                    {{- 'icon-close.svg' | inline_asset_content -}}
-                  </button>
-                <div class="custom-quick-view-modal__image-section">
-                  <div class="custom-quick-view-modal__image-container">
-                    <button class="custom-quick-view-modal__image-nav custom-quick-view-modal__image-nav--prev" aria-label="Previous image">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                      </svg>
+                <div class="custom-quick-view-modal__body">
+                    <button
+                      id="ModalClose-{{ product.id }}"
+                      type="button"
+                      class="custom-quick-view-modal__close"
+                      aria-label="{{ 'accessibility.close' | t }}"
+                    >
+                      {{- 'icon-close.svg' | inline_asset_content -}}
                     </button>
-                    
-                    <div class="custom-quick-view-modal__image">
-                      {% if product.images.size > 0 %}
-                        {% for image in product.images %}
+                  <div class="custom-quick-view-modal__image-section">
+                    <div class="custom-quick-view-modal__image-container">
+                      <button class="custom-quick-view-modal__image-nav custom-quick-view-modal__image-nav--prev" aria-label="Previous image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                      </button>
+                      
+                      <div class="custom-quick-view-modal__image">
+                        {% if product.images.size > 0 %}
+                          {% for image in product.images %}
+                            <img
+                              src="{{ image | image_url: width: 1000 }}"
+                              alt="{{ product.title }}"
+                              loading="lazy"
+                              width="600"
+                              height="700"
+                              class="product-image{% if forloop.first %} active{% endif %}"
+                              data-image-index="{{ forloop.index0 }}"
+                            >
+                          {% endfor %}
+                        {% elsif product.featured_image != blank %}
                           <img
-                            src="{{ image | image_url: width: 1000 }}"
+                            src="{{ product.featured_image | image_url: width: 1000 }}"
                             alt="{{ product.title }}"
                             loading="lazy"
                             width="600"
                             height="700"
-                            class="product-image{% if forloop.first %} active{% endif %}"
-                            data-image-index="{{ forloop.index0 }}"
+                            class="product-image active"
+                            data-image-index="0"
                           >
+                        {% endif %}
+                      </div>
+
+                      <button class="custom-quick-view-modal__image-nav custom-quick-view-modal__image-nav--next" aria-label="Next image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+
+                    {% if product.images.size > 1 %}
+                      <div class="custom-quick-view-modal__thumbnails">
+                        {% for image in product.images %}
+                          <button class="custom-quick-view-modal__thumbnail{% if forloop.first %} active{% endif %}" data-image-index="{{ forloop.index0 }}" aria-label="View image {{ forloop.index }}">
+                            <img
+                              src="{{ image | image_url: width: 100 }}"
+                              alt="{{ product.title }} thumbnail"
+                              loading="lazy"
+                              width="80"
+                              height="80"
+                            >
+                          </button>
                         {% endfor %}
-                      {% elsif product.featured_image != blank %}
-                        <img
-                          src="{{ product.featured_image | image_url: width: 1000 }}"
-                          alt="{{ product.title }}"
-                          loading="lazy"
-                          width="600"
-                          height="700"
-                          class="product-image active"
-                          data-image-index="0"
-                        >
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="custom-quick-view-modal__info">
+                    <h2 class="custom-quick-view-modal__title">{{ product.title }}</h2>
+
+                    <div class="custom-quick-view-modal__price-row">
+                      <div class="custom-price">
+                        {% render 'price', product: product %}
+                      </div>
+                      {% if product.compare_at_price > product.price %}
+                        <span class="custom-quick-view-modal__sale-badge">Sale</span>
                       {% endif %}
                     </div>
 
-                    <button class="custom-quick-view-modal__image-nav custom-quick-view-modal__image-nav--next" aria-label="Next image">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                      </svg>
-                    </button>
-                  </div>
+                    <p class="custom-quick-view-modal__meta">
+                      Tax included. Shipping calculated at checkout.
+                    </p>
 
-                  {% if product.images.size > 1 %}
-                    <div class="custom-quick-view-modal__thumbnails">
-                      {% for image in product.images %}
-                        <button class="custom-quick-view-modal__thumbnail{% if forloop.first %} active{% endif %}" data-image-index="{{ forloop.index0 }}" aria-label="View image {{ forloop.index }}">
-                          <img
-                            src="{{ image | image_url: width: 100 }}"
-                            alt="{{ product.title }} thumbnail"
-                            loading="lazy"
-                            width="80"
-                            height="80"
-                          >
-                        </button>
-                      {% endfor %}
-                    </div>
-                  {% endif %}
-                </div>
+                    <p class="custom-quick-view-modal__stock">
+                      <span class="custom-quick-view-modal__stock-dot"></span>
+                      {% if product.selected_or_first_available_variant.inventory_quantity != blank %}
+                        {{ product.selected_or_first_available_variant.inventory_quantity }} in stock
+                      {% elsif product.available %}
+                        In stock
+                      {% else %}
+                        Out of stock
+                      {% endif %}
+                    </p>
 
-                <div class="custom-quick-view-modal__info">
-                  <h2 class="custom-quick-view-modal__title">{{ product.title }}</h2>
-
-                  <div class="custom-quick-view-modal__price-row">
-                    <div class="custom-price">
-                      {% render 'price', product: product %}
-                    </div>
-                    {% if product.compare_at_price > product.price %}
-                      <span class="custom-quick-view-modal__sale-badge">Sale</span>
+                    {% if product.description != blank %}
+                      <div class="custom-quick-view-modal__description">
+                        {{ product.description | strip_html | truncate: 420 }}
+                      </div>
                     {% endif %}
-                  </div>
 
-                  <p class="custom-quick-view-modal__meta">
-                    Tax included. Shipping calculated at checkout.
-                  </p>
-
-                  <p class="custom-quick-view-modal__stock">
-                    <span class="custom-quick-view-modal__stock-dot"></span>
-                    {% if product.selected_or_first_available_variant.inventory_quantity != blank %}
-                      {{ product.selected_or_first_available_variant.inventory_quantity }} in stock
-                    {% elsif product.available %}
-                      In stock
-                    {% else %}
-                      Out of stock
-                    {% endif %}
-                  </p>
-
-                  {% if product.description != blank %}
-                    <div class="custom-quick-view-modal__description">
-                      {{ product.description | strip_html | truncate: 420 }}
-                    </div>
-                  {% endif %}
-
-                  {% if product.options_with_values != blank %}
-                    {% assign selected_options = product.selected_or_first_available_variant.selected_options %}
-                    <div class="custom-quick-view-modal__variants" data-product-id="{{ product.id }}">
-                      <input type="hidden" class="variant-id-input" value="{{ product.selected_or_first_available_variant.id }}">
-                      {% for option in product.options_with_values %}
-                        {% capture selected_value %}{% for selected in selected_options %}{% if selected.name == option.name %}{{ selected.value }}{% endif %}{% endfor %}{% endcapture %}
-                        <div class="custom-quick-view-modal__variant-group">
-                          <div class="custom-quick-view-modal__variant-label">{{ option.name }}:</div>
-                          <div class="custom-quick-view-modal__variant-values" data-option-name="{{ option.name }}">
-                            {% for value in option.values %}
-                              {% capture option_value %}{{ value }}{% endcapture %}
-                              {% if option.name contains 'Color' or option.name contains 'Colour' %}
-                                <button 
-                                  type="button" 
-                                  class="custom-quick-view-modal__swatch-button{% if option_value == selected_value %} selected{% endif %}" 
-                                  data-option-value="{{ value }}"
-                                  data-option-name="{{ option.name }}"
-                                  style="--swatch-color: var(--color-{{ value | downcase | replace: ' ', '-' }}, #ccc);" 
-                                  title="{{ value }}"
-                                >
-                                  <span class="swatch" style="background-color: var(--swatch-color);"></span>
-                                </button>
-                              {% else %}
-                                <button 
-                                  type="button" 
-                                  class="custom-quick-view-modal__pill{% if option_value == selected_value %} selected{% endif %}"
-                                  data-option-value="{{ value }}"
-                                  data-option-name="{{ option.name }}"
-                                >
-                                  {{ value }}
-                                </button>
-                              {% endif %}
-                            {% endfor %}
+                    {% if product.options_with_values != blank %}
+                      {% assign selected_options = product.selected_or_first_available_variant.selected_options %}
+                      <div class="custom-quick-view-modal__variants" data-product-id="{{ product.id }}">
+                        <input type="hidden" class="variant-id-input" value="{{ product.selected_or_first_available_variant.id }}">
+                        {% for option in product.options_with_values %}
+                          {% capture selected_value %}{% for selected in selected_options %}{% if selected.name == option.name %}{{ selected.value }}{% endif %}{% endfor %}{% endcapture %}
+                          <div class="custom-quick-view-modal__variant-group">
+                            <div class="custom-quick-view-modal__variant-label">{{ option.name }}:</div>
+                            <div class="custom-quick-view-modal__variant-values" data-option-name="{{ option.name }}">
+                              {% for value in option.values %}
+                                {% capture option_value %}{{ value }}{% endcapture %}
+                                {% if option.name contains 'Color' or option.name contains 'Colour' %}
+                                  <button 
+                                    type="button" 
+                                    class="custom-quick-view-modal__swatch-button{% if option_value == selected_value %} selected{% endif %}" 
+                                    data-option-value="{{ value }}"
+                                    data-option-name="{{ option.name }}"
+                                    style="--swatch-color: var(--color-{{ value | downcase | replace: ' ', '-' }}, #ccc);" 
+                                    title="{{ value }}"
+                                  >
+                                    <span class="swatch" style="background-color: var(--swatch-color);"></span>
+                                  </button>
+                                {% else %}
+                                  <button 
+                                    type="button" 
+                                    class="custom-quick-view-modal__pill{% if option_value == selected_value %} selected{% endif %}"
+                                    data-option-value="{{ value }}"
+                                    data-option-name="{{ option.name }}"
+                                  >
+                                    {{ value }}
+                                  </button>
+                                {% endif %}
+                              {% endfor %}
+                            </div>
                           </div>
-                        </div>
-                      {% endfor %}
-                      
-                      <script type="application/json" class="product-variants-data">
-                        {{ product.variants | json }}
-                      </script>
-                    </div>
-                  {% endif %}
+                        {% endfor %}
+                        
+                        <script type="application/json" class="product-variants-data">
+                          {{ product.variants | json }}
+                        </script>
+                      </div>
+                    {% endif %}
 
-                  {% if product.available %}
-                    <product-form>
-                      {% form 'product', product %}
-                        <input
-                          type="hidden"
-                          name="id"
-                          value="{{ product.selected_or_first_available_variant.id }}"
-                        >
-                        <button type="submit" class="button custom-quick-view-modal__add-to-cart">
-                          ADD TO CART
-                        </button>
-                      {% endform %}
-                    </product-form>
-                  {% else %}
-                    <button type="button" class="button button--disabled custom-quick-view-modal__sold-out" disabled>
-                      {{ 'products.product.sold_out' | t }}
-                    </button>
-                  {% endif %}
+                    {% if product.available %}
+                      <product-form>
+                        {% form 'product', product %}
+                          <input
+                            type="hidden"
+                            name="id"
+                            value="{{ product.selected_or_first_available_variant.id }}"
+                          >
+                          <button type="submit" class="button custom-quick-view-modal__add-to-cart">
+                            ADD TO CART
+                          </button>
+                        {% endform %}
+                      </product-form>
+                    {% else %}
+                      <button type="button" class="button button--disabled custom-quick-view-modal__sold-out" disabled>
+                        {{ 'products.product.sold_out' | t }}
+                      </button>
+                    {% endif %}
 
-                  <a href="{{ product.url }}" class="link custom-quick-view-modal__view-details">
-                    {{ 'products.product.view_full_details' | t }}
-                  </a>
+                    <a href="{{ product.url }}" class="link custom-quick-view-modal__view-details">
+                      {{ 'products.product.view_full_details' | t }}
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </modal-dialog>
+            </modal-dialog>
 
-          <div class="custom-product-info">
-            <h3 class="custom-product-title">
-              <a href="{{ product.url }}">
-                {{ product.title }}
-              </a>
-            </h3>
+            <div class="custom-product-info">
+              <h3 class="custom-product-title">
+                <a href="{{ product.url }}">
+                  {{ product.title }}
+                </a>
+              </h3>
 
-            <div class="custom-price">
-              {% render 'price', product: product %}
+              <div class="custom-price">
+                {% render 'price', product: product %}
+              </div>
             </div>
+
           </div>
 
-        </div>
+        {% endfor %}
 
-      {% endfor %}
-
+      </div>
+       <div class="swiper-button-prev"></div>
+       <div class="swiper-button-next"></div>
     </div>
   </div>
 </section>
