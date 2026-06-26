@@ -11,6 +11,8 @@
     --border-radius: {{ section.settings.card_radius }}px;
     --heading-color: {{ section.settings.heading_color }};
     --desktop-columns: {{ section.settings.desktop_columns }};
+    --tablet-columns: {{ section.settings.tablet_columns }};
+    --mobile-columns: {{ section.settings.mobile_columns }};
     --heading-size: {{ section.settings.heading_size }}px;
     --heading-transform: {{ section.settings.heading_transform }};
     --text-alignment: {{ section.settings.heading_alignment }};
@@ -840,6 +842,24 @@
       "step": 1,
       "default": 5,
       "label": "Desktop columns"
+    },
+    {
+      "type": "range",
+      "id": "tablet_columns",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "label": "Tablet columns"
+    },
+    {
+      "type": "range",
+      "id": "mobile_columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2,
+      "label": "Mobile columns"
     },
     {
       "type": "select",

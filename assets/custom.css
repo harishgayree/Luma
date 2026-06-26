@@ -695,6 +695,10 @@
       gap: 20px;
       grid-template-columns: repeat(2, 1fr);
    }
+
+   .custom-featured-grid {
+      grid-template-columns: repeat(var(--tablet-columns), 1fr);;
+   }
   }
 
   @media screen and (max-width: 991px){
@@ -721,9 +725,10 @@
   }
 
   @media screen and (max-width: 749px) {
+
     .custom-featured-grid {
-      grid-template-columns: 1fr;
-    }
+      grid-template-columns: repeat(var(--mobile-columns), 1fr);;
+   }
 
     .custom-product-card {
       border-right: 0;
