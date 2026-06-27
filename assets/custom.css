@@ -823,11 +823,19 @@
   }
 
   .banner__heading {
-    font-size: 30px;
+    font-size: 30px !important;
   }
 
   .banner__buttons .button {
     font-size: 16px;
     min-height: 4.5rem;
+  }
+
+  .banner__kicker svg {
+    height: 150px;
+  }
+
+  .img_banner .banner__text {
+    font-size: 22px;
   }
 }
