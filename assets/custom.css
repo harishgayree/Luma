@@ -733,8 +733,8 @@
 
     .custom-featured-grid {
       display: flex;
-      gap: 16px;
-      padding: 4px 4px 8px;
+      gap: 0;
+      padding: 0px 4px 0px;
       grid-template-columns: none;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
