@@ -28,7 +28,8 @@
       </div>
     {% endif %}
 
-    <div class="custom-featured-grid">
+    <div class="custom-featured-slider">
+      <div class="custom-featured-grid" data-slider-container>
 
       {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
 
@@ -278,12 +279,63 @@
 
       {% endfor %}
 
+      </div>
+
+      {% if section.settings.collection.products.size > 1 %}
+        <div class="custom-featured-slider__nav" aria-label="Collection slider controls">
+          <button type="button" class="custom-featured-slider__button custom-featured-slider__button--prev" aria-label="Previous products">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button type="button" class="custom-featured-slider__button custom-featured-slider__button--next" aria-label="Next products">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      {% endif %}
     </div>
   </div>
 </section>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.custom-featured-slider').forEach(slider => {
+      const container = slider.querySelector('[data-slider-container]');
+      const prevBtn = slider.querySelector('.custom-featured-slider__button--prev');
+      const nextBtn = slider.querySelector('.custom-featured-slider__button--next');
+
+      if (!container || !prevBtn || !nextBtn) return;
+
+      const getScrollAmount = () => {
+        const firstCard = container.querySelector('.custom-product-card');
+        if (!firstCard) return 0;
+
+        const style = window.getComputedStyle(container);
+        const gap = parseFloat(style.columnGap || style.gap || 0);
+        return firstCard.getBoundingClientRect().width + gap;
+      };
+
+      const updateButtons = () => {
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        prevBtn.disabled = container.scrollLeft <= 0;
+        nextBtn.disabled = container.scrollLeft >= maxScroll - 2;
+      };
+
+      prevBtn.addEventListener('click', () => {
+        container.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+      });
+
+      nextBtn.addEventListener('click', () => {
+        container.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+      });
+
+      container.addEventListener('scroll', updateButtons);
+      window.addEventListener('resize', updateButtons);
+      updateButtons();
+    });
+
     // Handle variant selection in quick view modal
     const variantButtons = document.querySelectorAll(
       '.custom-quick-view-modal__swatch-button, .custom-quick-view-modal__pill'

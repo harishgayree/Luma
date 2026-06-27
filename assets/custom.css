@@ -139,15 +139,24 @@
     letter-spacing: 1px;
   }
 
+  .custom-featured-slider {
+    position: relative;
+  }
+
+  .custom-featured-slider__nav {
+    display: none;
+  }
+
   .custom-featured-grid {
     display: grid;
-    grid-template-columns: repeat(var(--desktop-columns), 1fr);
+    grid-template-columns: repeat(var(--desktop-columns), minmax(0, 1fr));
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     overflow-y: hidden;
     overflow-x: auto;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
   .custom-featured-grid::-webkit-scrollbar{
@@ -718,12 +727,55 @@
   }
 
   @media screen and (max-width: 989px) {
-    .custom-featured-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .custom-featured-slider {
+      padding-bottom: 52px;
     }
 
-    .custom-product-card:nth-child(2n) {
-      border-right: 0;
+    .custom-featured-grid {
+      display: flex;
+      gap: 16px;
+      padding: 4px 4px 8px;
+      grid-template-columns: none;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+    }
+
+    .custom-product-card {
+      flex: 0 0 calc(50% - 8px);
+      max-width: calc(50% - 8px);
+      border-right: 1px solid var(--border-color);
+      scroll-snap-align: start;
+    }
+
+    .custom-featured-slider__nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .custom-featured-slider__button {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      background: var(--card-bg);
+      color: var(--title-color);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .custom-featured-slider__button svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .custom-featured-slider__button:disabled {
+      opacity: 0.45;
+      cursor: default;
     }
 
     .custom-product-image {
@@ -734,10 +786,12 @@
   @media screen and (max-width: 749px) {
 
     .custom-featured-grid {
-      grid-template-columns: repeat(var(--mobile-columns), 1fr);;
-   }
+      gap: 12px;
+    }
 
     .custom-product-card {
+      flex: 0 0 100%;
+      max-width: 100%;
       border-right: 0;
       border-bottom: 1px solid var(--border-color);
     }
