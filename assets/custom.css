@@ -726,7 +726,7 @@
   
   }
 
-  @media screen and (max-width: 989px) {
+  @media screen and (max-width: 1200px) {
     .custom-featured-slider {
       padding-bottom: 52px;
     }
