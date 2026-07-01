@@ -341,13 +341,24 @@
             "button_text": "READ MORE",
             "button_link": ""
           }
+        },
+        "blog_Hc3aPF": {
+          "type": "blog",
+          "settings": {
+            "date": "06 Mar",
+            "title": "Who avoids a produces?",
+            "text": "Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt...",
+            "button_text": "READ MORE",
+            "button_link": ""
+          }
         }
       },
       "block_order": [
         "blog_dzVBpz",
         "blog_6MN3DF",
         "blog_Kan6Ya",
-        "blog_L3LM8d"
+        "blog_L3LM8d",
+        "blog_Hc3aPF"
       ],
       "name": "Fashion Blogs",
       "settings": {
