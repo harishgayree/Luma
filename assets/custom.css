@@ -714,6 +714,10 @@
     gap: 1.2rem;
   }
 
+  .slider-button {
+    color: #000 !important;
+  }
+
   @media screen and (max-width: 991px){
   
     .custom-mega-dropdown,
