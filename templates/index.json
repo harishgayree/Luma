@@ -147,7 +147,7 @@
         "item_size": 18,
         "arrow_bg": "#ffffff",
         "arrow_color": "#000000",
-        "columns_mobile": "2",
+        "columns_mobile": "1",
         "swipe_on_mobile": true,
         "padding_top": 36,
         "padding_bottom": 36
