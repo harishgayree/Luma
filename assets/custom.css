@@ -707,7 +707,7 @@
   }
 
   .slider-counter {
-    display: none;
+    display: none !important;
   }
 
   .slider-buttons {
