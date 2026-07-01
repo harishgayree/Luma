@@ -2210,8 +2210,8 @@ input[type='checkbox'] {
 
 @media screen and (min-width: 990px) {
   body:has(.section-header .header:not(.drawer-menu)) .utility-bar .page-width {
-    padding-left: 5rem;
-    padding-right: 5rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 
   .announcement-bar-slider {
