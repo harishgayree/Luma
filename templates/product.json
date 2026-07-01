@@ -27,6 +27,14 @@
           "type": "price",
           "settings": {}
         },
+        "inventory_U7btjm": {
+          "type": "inventory",
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 5,
+            "show_inventory_quantity": true
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -37,14 +45,6 @@
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
-        },
-        "inventory_U7btjm": {
-          "type": "inventory",
-          "settings": {
-            "text_style": "body",
-            "inventory_threshold": 5,
-            "show_inventory_quantity": true
-          }
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -68,9 +68,9 @@
         "vendor",
         "title",
         "price",
+        "inventory_U7btjm",
         "variant_picker",
         "quantity_selector",
-        "inventory_U7btjm",
         "buy_buttons",
         "description",
         "share"
