@@ -108,7 +108,7 @@
 
 .small-blog-item{
   display:grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr;
   gap:30px;
   align-items:center;
 }
@@ -121,7 +121,7 @@
 .small-blog-image img{
   width:100%;
   display:block;
-  height:200px;
+  height:220px;
   object-fit:cover;
 }
 
