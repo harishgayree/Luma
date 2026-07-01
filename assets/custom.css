@@ -493,22 +493,32 @@
   .mega-product-grid {
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    gap: 12px;
+    gap: 0;
+  }
+
+  .mega-product-card {
+    border: 1px solid #000;
   }
   
   .mega-product-card a {
     text-decoration: none;
   }
   
+  .mega-product-image {
+    width: 230px;
+    height: 260px;
+  }
+
   .mega-product-image img {
-    width: 210px;
+    width: 100%;
     display: block;
-    height: 250px;
+    height: 100%;
     object-fit: cover;
   }
   
   .mega-product-info {
     padding: 15px;
+    border-top: 1px solid #000;
   }
   
   .mega-product-info h4 {
@@ -716,6 +726,10 @@
 
   .slider-button {
     color: #000 !important;
+  }
+
+  .mega-product-card {
+    border: 1px solid #000;
   }
 
   @media screen and (max-width: 991px){
