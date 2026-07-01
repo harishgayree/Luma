@@ -182,7 +182,12 @@
     font-size: 15px;
   }
 
-  .small-blog-item, .fashion-blog-grid {
+  .small-blog-item {
+    gap: 20px;
+    grid-template-columns: auto;
+  }
+
+  .fashion-blog-grid {
     gap: 20px;
   }
 
