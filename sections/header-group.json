@@ -61,22 +61,11 @@
             "product_1": "embroidered-dupatta",
             "product_2": "cotton-leggings"
           }
-        },
-        "mega_menu_zT7fmV": {
-          "type": "mega_menu",
-          "settings": {
-            "menu_title": "",
-            "heading": "Popular collection",
-            "collection": "",
-            "product_1": "",
-            "product_2": ""
-          }
         }
       },
       "block_order": [
         "mega_menu_DePLVR",
-        "mega_menu_zyw9YR",
-        "mega_menu_zT7fmV"
+        "mega_menu_zyw9YR"
       ],
       "settings": {
         "logo_position": "top-center",
