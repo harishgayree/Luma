@@ -743,6 +743,10 @@
 
   @media screen and (max-width: 1200px) {
 
+    .offer-box span {
+      font-size: 12px;
+    }
+
     .custom-mega-links {
       gap: 20px;
       grid-template-columns: repeat(2, 1fr);
