@@ -34,12 +34,19 @@
             "heading": "Quick links",
             "menu": "footer"
           }
+        },
+        "brand_information_7yzTBa": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": true
+          }
         }
       },
       "block_order": [
         "link_list_9EXTAD",
         "link_list_ExbMaR",
-        "link_list_tnVKmU"
+        "link_list_tnVKmU",
+        "brand_information_7yzTBa"
       ],
       "settings": {
         "color_scheme": "scheme-4",
