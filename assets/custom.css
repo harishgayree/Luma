@@ -706,17 +706,6 @@
     text-align: center;
   }
 
-  @media (max-width: 1200px) {
-   .custom-mega-links {
-      gap: 20px;
-      grid-template-columns: repeat(2, 1fr);
-   }
-
-   .custom-featured-grid {
-      grid-template-columns: repeat(var(--tablet-columns), 1fr);;
-   }
-  }
-
   @media screen and (max-width: 991px){
   
     .custom-mega-dropdown,
@@ -727,6 +716,12 @@
   }
 
   @media screen and (max-width: 1200px) {
+
+    .custom-mega-links {
+      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     .custom-featured-slider {
       padding-bottom: 52px;
     }
