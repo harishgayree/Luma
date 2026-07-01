@@ -147,8 +147,8 @@
         "item_size": 18,
         "arrow_bg": "#ffffff",
         "arrow_color": "#000000",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -161,6 +161,8 @@
         "heading": "NEW ARRIVALS",
         "products_to_show": 5,
         "desktop_columns": 5,
+        "tablet_columns": 3,
+        "mobile_columns": 2,
         "heading_alignment": "center",
         "heading_transform": "uppercase",
         "heading_size": 40,
