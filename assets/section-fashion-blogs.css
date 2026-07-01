@@ -34,7 +34,7 @@
   position:relative;
   overflow:hidden;
   border-radius:16px;
-  min-height:700px;
+  min-height:500px;
 }
 
 .large-card img{
@@ -102,7 +102,7 @@
   display:flex;
   flex-direction:column;
   gap:25px;
-  max-height: 700px;
+  max-height: 500px;
   overflow-y: scroll;
   scrollbar-width: none;
 }
@@ -122,7 +122,7 @@
 .small-blog-image img{
   width:100%;
   display:block;
-  height:320px;
+  height:200px;
   object-fit:cover;
 }
 
