@@ -780,6 +780,10 @@
 
   @media screen and (max-width: 749px) {
 
+    .custom-featured-heading {
+      margin-bottom: 30px;
+    }
+
     .custom-featured-grid {
       gap: 12px;
     }

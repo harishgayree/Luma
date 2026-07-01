@@ -338,10 +338,11 @@ slider-component.slider-component-full-width {
 .slider-button {
   color: rgba(var(--color-foreground), 0.75);
   background: transparent;
-  border: none;
+  border: 1px solid #000;
+  border-radius: 50px;
   cursor: pointer;
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
