@@ -70,6 +70,7 @@
         "column_VxVPVD": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/blog-8-b1fee8dd-cd8f-4c33-bb15-199b7809612c.png",
             "title": "Column",
             "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
             "link_label": "",
@@ -103,9 +104,9 @@
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
         "title": "Multicolumn",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
+        "heading_size": "h2",
+        "image_width": "half",
+        "image_ratio": "circle",
         "button_label": "",
         "button_link": "",
         "columns_desktop": 3,
