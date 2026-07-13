@@ -49,7 +49,7 @@
       ],
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
-        "image": "shopify://shop_images/blog-4-a63c4a0e-91b7-4f66-ac17-b74e2fcf74f5.png",
+        "image": "shopify://shop_images/slider-2-e6fc5d6a-eaaf-43d8-8ecb-52257201e172.png",
         "height": "small",
         "desktop_image_width": "medium",
         "layout": "image_first",
@@ -80,7 +80,7 @@
         "column_KtzWB7": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/image_5.png",
+            "image": "shopify://shop_images/blog-4-a63c4a0e-91b7-4f66-ac17-b74e2fcf74f5.png",
             "title": "Column",
             "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
             "link_label": "Read More",
