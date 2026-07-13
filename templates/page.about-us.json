@@ -36,8 +36,8 @@
         "button_YtRTT6": {
           "type": "button",
           "settings": {
-            "button_label": "Button label",
-            "button_link": "",
+            "button_label": "Read More",
+            "button_link": "shopify://pages/data-sharing-opt-out",
             "button_style_secondary": false
           }
         }
