@@ -73,7 +73,7 @@
             "image": "shopify://shop_images/blog-8-b1fee8dd-cd8f-4c33-bb15-199b7809612c.png",
             "title": "Column",
             "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
+            "link_label": "Read More",
             "link": ""
           }
         },
@@ -83,16 +83,17 @@
             "image": "shopify://shop_images/image_5.png",
             "title": "Column",
             "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
+            "link_label": "Read More",
             "link": ""
           }
         },
         "column_TqzhPD": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/DSC_8356.jpg",
             "title": "Column",
             "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
+            "link_label": "Read More",
             "link": ""
           }
         }
