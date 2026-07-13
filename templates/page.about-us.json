@@ -118,6 +118,68 @@
         "columns_mobile": "1",
         "swipe_on_mobile": true,
         "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "collapsible_content_dPdHQp": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_VztahY": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_9dehen": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_Kw7BgV": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_WbFnmk": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_VztahY",
+        "collapsible_row_9dehen",
+        "collapsible_row_Kw7BgV",
+        "collapsible_row_WbFnmk"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "",
+        "heading": "Collapsible content",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "section",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "large",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
         "padding_bottom": 36
       }
     }
@@ -125,6 +187,7 @@
   "order": [
     "main",
     "image_with_text_gGWdmR",
-    "multicolumn_xBaYLb"
+    "multicolumn_xBaYLb",
+    "collapsible_content_dPdHQp"
   ]
 }
