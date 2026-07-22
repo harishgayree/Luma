@@ -12,25 +12,6 @@
     "slideshow_pND3RK": {
       "type": "slideshow",
       "blocks": {
-        "slide_bqcrBa": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/slider-1-af032f75-be19-40f5-90d9-5e3d7803ec49.png",
-            "image_overlay_opacity": 0,
-            "subheading": "Outwere for cooler day",
-            "heading": "<strong>Bold looks everyday wear</strong>",
-            "heading_size": "hxxl",
-            "text_transform": "uppercase",
-            "button_label": "SHOP NOW",
-            "link": "shopify://collections/all",
-            "button_style_secondary": false,
-            "show_text_box": false,
-            "box_align": "middle-left",
-            "text_alignment": "left",
-            "text_alignment_mobile": "center",
-            "color_scheme": ""
-          }
-        },
         "slide_XWQE8W": {
           "type": "slide",
           "settings": {
@@ -42,6 +23,25 @@
             "text_transform": "uppercase",
             "button_label": "SHOP NOW",
             "link": "shopify://collections",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-left",
+            "text_alignment": "left",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          }
+        },
+        "slide_bqcrBa": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/slider-1-af032f75-be19-40f5-90d9-5e3d7803ec49.png",
+            "image_overlay_opacity": 0,
+            "subheading": "Outwere for cooler day",
+            "heading": "<strong>Bold looks everyday wear</strong>",
+            "heading_size": "hxxl",
+            "text_transform": "uppercase",
+            "button_label": "SHOP NOW",
+            "link": "shopify://collections/all",
             "button_style_secondary": false,
             "show_text_box": false,
             "box_align": "middle-left",
@@ -71,8 +71,8 @@
         }
       },
       "block_order": [
-        "slide_bqcrBa",
         "slide_XWQE8W",
+        "slide_bqcrBa",
         "slide_PcH9re"
       ],
       "name": "t:sections.slideshow.presets.name",
