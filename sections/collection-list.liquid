@@ -200,13 +200,18 @@
   left: 50%;
   transform: translateX(-50%);
   bottom: 20px;
+  z-index: 9;
 }
 
-.custom-collection-title{
+.custom-collection-title {
   margin:0;
   color:{{ section.settings.title_color }};
   font-size:{{ section.settings.title_size }}px;
   text-transform:{{ section.settings.card_text_transform }};
+}
+
+.custom-collection-title:hover{
+  color:{{ section.settings.title_hover_color }};
 }
 
 .custom-arrow{
@@ -410,6 +415,12 @@
       "id": "title_color",
       "label": "Title Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_hover_color",
+      "label": "Title Hover Color",
+      "default": "#000000"
     },
     {
       "type": "range",
