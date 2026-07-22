@@ -227,6 +227,11 @@
   transform: translate(-50%, -50%);
 }
 
+.custom-arrow:hover{
+  background:{{ section.settings.arrow_hover_bg }};
+  color:{{ section.settings.arrow_hover_color }};
+}
+
 .custom-collection-card:hover .custom-arrow{
   opacity:1;
 }
@@ -484,6 +489,18 @@
       "id": "arrow_color",
       "label": "Arrow Color",
       "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_bg",
+      "label": "Arrow Hover Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_color",
+      "label": "Arrow Hover Color",
+      "default": "#ffffff"
     },
     {
       "type": "header",
